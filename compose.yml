@@ -7,7 +7,17 @@ services:
       - "3000:3000"
     volumes:
       - rails-bundle:/usr/local/bundle
+      - ./back:/myqpp
+  front:
+    build: ./front
+    ports:
+      - "8080:8080"
+    volumes:
+      - /myqpp/node_modules
+      - ./front:/myqpp
 
 volumes:
   rails-bundle:
+    driver: local
+  node_modules:
     driver: local
