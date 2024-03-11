@@ -55,15 +55,12 @@ services:
       - ./swagger/openapi.yaml:/openapi.yaml
 
   db:
-    image: mysql
+    image: mysql:8.0
     environment:
-      DB_USER: root
-      DB_PW: password
-      DB_HOST: db
-      BUNDLE_PATH: /bundle
+      MYSQL_ROOT_PASSWORD: password
       TZ: "Asia/Tokyo"
     volumes:
-      - mysql_volume:/var/lib/mysql
+      - ./db:/var/lib/mysql
     restart: always
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     healthcheck:
