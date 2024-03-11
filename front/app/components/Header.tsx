@@ -1,24 +1,18 @@
 import React from "react";
+import { HamburgerIcon } from "@chakra-ui/icons";
+
+import IconButton from "./Button";
 
 const Header = () => {
+  const handleButtonClick = () => {
+    // ボタンがクリックされた時の処理
+    console.log("ボタンがクリックされました");
+  };
+
   return (
     <header className="h-16 w-full flex items-center px-4">
       <div className="order-first">
-        <button className="w-12 h-12 rounded-full hover:bg-gray-200 flex items-center justify-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="black"
-            className="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-            />
-          </svg>
-        </button>
+        <IconButton icon={HamburgerIcon} onClick={handleButtonClick} />
       </div>
       <div className="flex items-center ml-4">
         <img src="/Q.png" alt="Q" className="w-8 h-8" />
