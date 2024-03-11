@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
@@ -15,7 +16,7 @@ const Header = () => {
         <IconButton icon={HamburgerIcon} onClick={handleButtonClick} />
       </div>
       <div className="flex items-center ml-4">
-        <img src="/Q.png" alt="Q" className="w-8 h-8" />
+        <Image src="/Q.png" alt="Q" width={32} height={32} />
         <p className="text-3xl ml-4">Q-ON!</p>
         <button className="w-16 h-12 rounded-lg border border-gray-400 hover:bg-gray-200 ml-8 flex items-center justify-center text-base">
           今日

@@ -7,14 +7,21 @@ services:
       - "3000:3000"
     volumes:
       - rails-bundle:/usr/local/bundle
-      - ./back:/myqpp
+      - ./back:/myapp
+
   front:
     build: ./front
     ports:
       - "8080:8080"
     volumes:
-      - /myqpp/node_modules
-      - ./front:/myqpp
+      - node_modules:/myapp/node_modules
+      - ./front:/myapp
+    environment:
+      - WATCHPACK_POLLING=true
+    tty: true
+    stdin_open: true
+    restart: always
+
   swagger-editor:
     image: swaggerapi/swagger-editor
     ports:
