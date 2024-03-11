@@ -1,0 +1,388 @@
+openapi: 3.0.3
+info:
+  title: Q-ON API仕様書
+  description: きゅうON!（Q-ON!）に関するAPI仕様書。 **CRUD操作については省略しているところがあるので適宜追加すること！**
+  version: 1.0.0
+servers:
+  - url: http://localhost:8003
+    description: "モックサーバ"
+  - url: http://localhost:3030
+    description: "ローカルサーバ"
+
+tags:
+  - name: "calendar"
+    description: "カレンダーに関するAPI"
+  - name: "shift"
+    description: "バイトのシフトに関するAPI"
+  - name: "partTime"
+    description: "バイトに関するAPI"
+  - name: "billingGoal"
+    description: "期待値計算に関するAPI"
+  - name: "graph"
+    description: "グラフに関するAPI"
+
+paths:
+  "/calendar":
+    get:
+      tags:
+        - "calendar"
+      summary: "カレンダーの表示に関するデータを取得"
+      responses:
+        "200":
+          description: "取得が成功した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  calendar:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        month:
+                          type: integer
+                          example: 1
+                        day:
+                          type: integer
+                          example: 1
+                        holiday:
+                          type: string
+                          example: "元日"
+                        shifts:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              title:
+                                type: string
+                                example: "バンド練習"
+                              color:
+                                type: string
+                                example: "#FF0000"
+                  goalMonthlyIncome::
+                    type: integer
+                    description: "目標金額"
+                    example: 50000
+                  currentIncome:
+                    type: integer
+                    description: "現在の金額"
+                    example: 15000
+                  expectedIncome:
+                    type: integer
+                    description: "見込み"
+                    example: 60000
+                  billingGoalMoney:
+                    type: integer
+                    description: "期待値金額"
+                    example: 20000
+  "/shift/{id}":
+    get:
+      tags:
+        - "shift"
+      summary: "シフトの詳細に関するデータを取得"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "シフトID"
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "取得が成功した場合"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Shift"
+  "/partTime":
+    get:
+      tags:
+        - "partTime"
+      summary: "バイトの一覧に関するデータを取得"
+      responses:
+        "200":
+          description: "取得が成功した場合"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "放課後ティータイム"
+    post:
+      tags:
+        - "partTime"
+      summary: "バイトの新規登録"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "放課後ティータイム"
+                color:
+                  type: string
+                  example: "#FF0000"
+                closingDate:
+                  type: integer
+                  example: 0
+                  description: "締日。月末の場合は0"
+                payDay:
+                  type: integer
+                  example: 25
+                  description: "支払日"
+                pay:
+                  type: integer
+                  example: 1070
+                  description: "時給"
+      responses:
+        "200":
+          description: "登録が成功した場合"
+  "/partTime/{id}":
+    get:
+      tags:
+        - "partTime"
+      summary: "バイトの詳細に関するデータを取得"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "バイトID"
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: "取得が成功した場合"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartTime"
+    put:
+      tags:
+        - "partTime"
+      summary: "バイトの詳細に関するデータを更新"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "バイトID"
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PartTime"
+      responses:
+        "200":
+          description: "更新が成功した場合"
+  "/billingGoal":
+    get:
+      tags:
+        - "billingGoal"
+      summary: "期待値計算に関するデータを取得"
+      responses:
+        "200":
+          description: "取得が成功した場合"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BillingGoal"
+    post:
+      tags:
+        - "billingGoal"
+      summary: "期待値計算の新規登録"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillingGoal"
+      responses:
+        "200":
+          description: "更新が成功した場合"
+    put:
+      tags:
+        - "billingGoal"
+      summary: "期待値計算の更新"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BillingGoal"
+      responses:
+        "200":
+          description: "更新が成功した場合"
+  "/graph/{year}":
+    get:
+      tags:
+        - "graph"
+      summary: "年間のグラフに関するデータを取得"
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: "年"
+          schema:
+            type: integer
+            example: 2022
+      responses:
+        "200":
+          description: "取得が成功した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goalMonthlyIncome:
+                    type: integer
+                    description: "目標月収"
+                    example: 100100
+                  monthList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        month:
+                          type: integer
+                          example: 1
+                        expectedMoney:
+                          type: integer
+                          example: 100000
+                          description: "予想給与"
+                        finalMoney:
+                          type: integer
+                          example: 101473
+                          description: "最終給与"
+  "/graph/{year}/{month}":
+    get:
+      tags:
+        - "graph"
+      summary: "月間のグラフに関するデータを取得"
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: "年"
+          schema:
+            type: integer
+            example: 2022
+        - name: month
+          in: path
+          required: true
+          description: "月"
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: "取得が成功した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  goalMonthlyIncome:
+                    type: integer
+                    description: "目標月収"
+                    example: 100100
+                  MonthIncome:
+                    type: integer
+                    example: 101473
+                    description: "今月の給与。最終給与がない場合は予想給与を返す"
+
+components:
+  schemas:
+    PartTime:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "放課後ティータイム"
+        color:
+          type: string
+          example: "#FF0000"
+        closingDate:
+          type: integer
+          example: 0
+          description: "締日。月末の場合は0"
+        payDay:
+          type: integer
+          example: 25
+          description: "支払日"
+        pay:
+          type: integer
+          example: 1070
+          description: "時給"
+    BillingGoal:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+          description: "ユーザID"
+        title:
+          type: string
+          example: "誕生日プレゼントガチャ"
+        money:
+          type: integer
+          example: 160
+          description: "1回のガチャにかかる金額"
+        count:
+          type: integer
+          example: 10
+          description: "ガチャを引く回数"
+        memo:
+          type: string
+          example: "あずにゃんの誕生日プレゼント"
+    Shift:
+      properties:
+        id:
+          type: integer
+          example: 1
+        partTimes:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: "放課後ティータイム"
+        title: 
+          type: string
+          example: "バンド練習"
+        start:
+          type: string
+          format: date-time
+          example: "2022-01-01T10:00:00"
+        end:
+          type: string
+          format: date-time
+          example: "2022-01-01T18:00:00"
+        restTime:
+          type: integer
+          example: 60
+        memo:
+          type: string
+          example: "あずにゃんに向けた歌詞を考える！！"
