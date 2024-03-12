@@ -6,7 +6,7 @@ RUN apt-get update -qq && \
     npm install yarn -g -y
 RUN mkdir /myapp
 WORKDIR /myapp
-ADD Gemfile /myapp/Gemfile
-ADD Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
 ADD . /myapp
+RUN chmod 755 /myapp/bin/render-build.sh
+
+RUN bundle install
