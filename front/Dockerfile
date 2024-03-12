@@ -10,6 +10,4 @@ RUN npm install
 
 ADD . /myapp
 
-EXPOSE 8080
-
 CMD ["npm", "run", "dev"]
