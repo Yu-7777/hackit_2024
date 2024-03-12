@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import React from "react";
-import { HamburgerIcon, ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { BsCalendar, BsGem, BsGraphUp, BsPersonFill } from "react-icons/bs";
+import { HamburgerIcon, ChevronLeftIcon, ChevronRightIcon, SettingsIcon } from "@chakra-ui/icons";
+import { BsCalendar, BsGem, BsGraphUp } from "react-icons/bs";
 
 import GrayRoundButton from "./GrayRoundButton";
 import GraySquareButton from "./GraySquareButton";
@@ -29,7 +29,7 @@ const Header = () => {
       <GrayRoundButton icon={ChevronLeftIcon} onClick={handleButtonClick} />
       <GrayRoundButton icon={ChevronRightIcon} onClick={handleButtonClick} />
       <p className="text-lg ml-8">2024年3月</p>
-      <div className="flex justify-end">
+      <div className="md:ml-auto flex justify-center">
         <GraySquareButton onClick={handleButtonClick} borderRadius="rounded-l-lg">
           <BsCalendar />
         </GraySquareButton>
@@ -39,6 +39,11 @@ const Header = () => {
         <GraySquareButton onClick={handleButtonClick} borderRadius="rounded-r-lg">
           <BsGraphUp />
         </GraySquareButton>
+        <div className="ml-8">
+        <GrayRoundButton icon={SettingsIcon} onClick={handleButtonClick} />
+        </div>
+
+        
       </div>
     </header>
   );
