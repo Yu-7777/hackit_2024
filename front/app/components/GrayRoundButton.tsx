@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const IconButton = ({ icon: Icon, onClick }) => {
+const GrayRoundButton = ({ icon: Icon, onClick }) => {
   return (
     <button
       className="w-12 h-12 rounded-full hover:bg-gray-200 flex items-center justify-center"
@@ -11,4 +11,4 @@ const IconButton = ({ icon: Icon, onClick }) => {
   );
 };
 
-export default IconButton;
+export default GrayRoundButton;

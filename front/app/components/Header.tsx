@@ -4,11 +4,14 @@ import Image from "next/image";
 import React from "react";
 import {
   HamburgerIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  SettingsIcon,
 } from "@chakra-ui/icons";
+import { BsCalendar, BsGem, BsGraphUp } from "react-icons/bs";
 
-import IconButton from "./Button";
+import GrayRoundButton from "./GrayRoundButton";
+import GraySquareButton from "./GraySquareButton";
 
 const Header = () => {
   const handleButtonClick = () => {
@@ -17,9 +20,9 @@ const Header = () => {
   };
 
   return (
-    <header className="h-16 w-full flex items-center px-4">
+    <header className="h-16 w-full flex items-center px-4 border border-gray-200">
       <div className="order-first">
-        <IconButton icon={HamburgerIcon} onClick={handleButtonClick} />
+        <GrayRoundButton icon={HamburgerIcon} onClick={handleButtonClick} />
       </div>
       <div className="flex items-center ml-4">
         <Image src="/Q.png" alt="Q" width={32} height={32} />
@@ -28,9 +31,29 @@ const Header = () => {
           今日
         </button>
       </div>
-      <IconButton icon={ArrowLeftIcon} onClick={handleButtonClick} />
-      <IconButton icon={ArrowRightIcon} onClick={handleButtonClick} />
+      <GrayRoundButton icon={ChevronLeftIcon} onClick={handleButtonClick} />
+      <GrayRoundButton icon={ChevronRightIcon} onClick={handleButtonClick} />
       <p className="text-lg ml-8">2024年3月</p>
+      <div className="md:ml-auto flex justify-center">
+        <GraySquareButton
+          onClick={handleButtonClick}
+          borderRadius="rounded-l-lg"
+        >
+          <BsCalendar />
+        </GraySquareButton>
+        <GraySquareButton onClick={handleButtonClick}>
+          <BsGem />
+        </GraySquareButton>
+        <GraySquareButton
+          onClick={handleButtonClick}
+          borderRadius="rounded-r-lg"
+        >
+          <BsGraphUp />
+        </GraySquareButton>
+        <div className="ml-8">
+          <GrayRoundButton icon={SettingsIcon} onClick={handleButtonClick} />
+        </div>
+      </div>
     </header>
   );
 };
