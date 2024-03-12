@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'auth'
   devise_for :users
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -9,4 +10,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  namespace :api do
+    namespace :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth'
+      
+      namespace :auth do
+        resources :sessions, only: [:index]
+      end
+    end
+  end
 end
