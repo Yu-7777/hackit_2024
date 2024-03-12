@@ -2,13 +2,8 @@
 
 import Image from "next/image";
 import React from "react";
-import {
-  HamburgerIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  CalendarIcon,
-} from "@chakra-ui/icons";
-import { BsGem, BsGraphUp, BsPersonFill } from "react-icons/bs";
+import { HamburgerIcon, ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { BsCalendar, BsGem, BsGraphUp, BsPersonFill } from "react-icons/bs";
 
 import GrayRoundButton from "./GrayRoundButton";
 import GraySquareButton from "./GraySquareButton";
@@ -35,21 +30,15 @@ const Header = () => {
       <GrayRoundButton icon={ChevronRightIcon} onClick={handleButtonClick} />
       <p className="text-lg ml-8">2024年3月</p>
       <div className="flex justify-end">
-        <GraySquareButton
-          icon={CalendarIcon}
-          onClick={handleButtonClick}
-          borderRadius="rounded-l-lg"
-        ></GraySquareButton>
-        <GraySquareButton
-          icon={BsGem}
-          onClick={handleButtonClick}
-        ></GraySquareButton>
-        <GraySquareButton
-          icon={BsGraphUp}
-          onClick={handleButtonClick}
-          borderRadius="rounded-r-lg"
-        ></GraySquareButton>
-        <GrayRoundButton icon={BsPersonFill} onClick={handleButtonClick} />
+        <GraySquareButton onClick={handleButtonClick} borderRadius="rounded-l-lg">
+          <BsCalendar />
+        </GraySquareButton>
+        <GraySquareButton onClick={handleButtonClick}>
+          <BsGem />
+        </GraySquareButton>
+        <GraySquareButton onClick={handleButtonClick} borderRadius="rounded-r-lg">
+          <BsGraphUp />
+        </GraySquareButton>
       </div>
     </header>
   );
