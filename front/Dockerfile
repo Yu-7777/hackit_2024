@@ -3,11 +3,8 @@ FROM node:20.11.0
 RUN mkdir /myapp
 WORKDIR /myapp
 
-ADD package.json /myapp/package.json
-ADD package-lock.json /myapp/package-lock.json
+ADD . /myapp
 
 RUN npm install
-
-ADD . /myapp
 
 CMD ["npm", "run", "dev"]
