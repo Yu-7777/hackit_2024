@@ -5,6 +5,7 @@ import FullCalendar from "@fullcalendar/react";
 import Header from "../components/Header";
 import SideMenu from "../components/Sidemenu";
 import dayGridPlugin from "@fullcalendar/daygrid"; // pluginは、あとから
+import { ChakraProvider } from "@chakra-ui/react";
 
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(true);

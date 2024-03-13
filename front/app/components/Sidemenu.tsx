@@ -1,23 +1,24 @@
 import React from "react";
-import { Menu, MenuButton, MenuList, MenuItem, Button, background } from "@chakra-ui/react";
-import CreateButton from "./CreateButton";
+import { Menu, MenuButton, MenuList, MenuItem, Button, ChakraProvider, Box, Text } from "@chakra-ui/react";
+import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
 
 const SideMenu = () => {
   return (
-    <div className="w-72 h-screen border border-gray-200 z-10 absolute" style={{background: "#fff"}}>
-      <Menu>
-        <MenuButton as={CreateButton} >
-          Actions
-        </MenuButton>
-        <MenuList>
-          <MenuItem>Download</MenuItem>
-          <MenuItem>Create a Copy</MenuItem>
-          <MenuItem>Mark as Draft</MenuItem>
-          <MenuItem>Delete</MenuItem>
-          <MenuItem>Attend a Workshop</MenuItem>
-        </MenuList>
-      </Menu>
-    </div>
+    <ChakraProvider>
+      <div className="w-72 h-screen border border-gray-200 z-10 absolute" style={{background: "#fff"}}>
+        <Menu>
+          <MenuButton as={Button} rightIcon={<ChevronDownIcon />} ml={5} mt={5}>
+              <AddIcon /> 作成
+          </MenuButton>
+          <MenuList>
+            <MenuItem>バイト先の追加</MenuItem>
+            <MenuItem>シフトの追加</MenuItem>
+            <MenuItem>目標金額の変更</MenuItem>
+            <MenuItem>期待値の変更</MenuItem>
+          </MenuList>
+        </Menu>
+      </div>
+    </ChakraProvider>
   );
 };
 
