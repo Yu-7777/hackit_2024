@@ -26,11 +26,13 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./front/app:/myapp/app
-      - ./front/public:/myapp/public
       - node_modules:/myapp/node_modules
+      - ./front:/myapp
+    environment:
+      - WATCHPACK_POLLING=true
     tty: true
     stdin_open: true
+    restart: always
 
   swagger-editor:
     image: swaggerapi/swagger-editor
