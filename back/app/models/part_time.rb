@@ -1,2 +1,3 @@
 class PartTime < ApplicationRecord
+    
 end
