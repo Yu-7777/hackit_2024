@@ -3,7 +3,7 @@ FROM node:20.11.0
 RUN mkdir /myapp
 WORKDIR /myapp
 
-ADD . /myapp
+ADD . .
 
 RUN npm install
 
