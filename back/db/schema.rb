@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_12_175817) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_13_182430) do
   create_table "part_time_colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "colorcode"
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_12_175817) do
     t.integer "transfer_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "up_manny"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
