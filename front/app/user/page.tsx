@@ -20,8 +20,8 @@ const Page = () => {
   return (
     <>
       <Header isSideMenuOpen={isSideMenuOpen} toggleSideMenu={toggleSideMenu} />
+      {isSideMenuOpen && <SideMenu />}
       <div className="flex min-h-100vh">
-        {isSideMenuOpen && <SideMenu />}
         <div className="flex flex-col flex-grow">
           <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
         </div>

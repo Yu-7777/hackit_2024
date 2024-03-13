@@ -11,8 +11,13 @@ import { BsCalendar, BsGem, BsGraphUp } from "react-icons/bs";
 
 import GrayRoundButton from "./GrayRoundButton";
 import GraySquareButton from "./GraySquareButton";
+import { useDisclosure } from "@chakra-ui/react";
+import React from "react";
 
 export const Header = ({ isSideMenuOpen, toggleSideMenu }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
+
   // Header をエクスポートする
   const handleButtonClick = () => {
     // ボタンがクリックされた時の処理
