@@ -2,19 +2,38 @@ version: '3.7'
 
 services:
   back:
-    build: ./back
+    build:
+      context: ./back
     ports:
       - "3000:3000"
     volumes:
       - rails-bundle:/usr/local/bundle
-      - ./back:/myqpp
+      - ./back:/myapp
+    depends_on:
+      - db
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      DB_USER: root
+      DB_PW: password
+      DB_HOST: db
+      BUNDLE_PATH: /usr/local/bundle
+      TZ: "Asia/Tokyo"
+    tty: true
+    stdin_open: true
+
   front:
     build: ./front
     ports:
       - "8080:8080"
     volumes:
-      - /myqpp/node_modules
-      - ./front:/myqpp
+      - node_modules:/myapp/node_modules
+      - ./front:/myapp
+    environment:
+      - WATCHPACK_POLLING=true
+    tty: true
+    stdin_open: true
+    restart: always
+
   swagger-editor:
     image: swaggerapi/swagger-editor
     ports:
@@ -39,6 +58,24 @@ services:
     command: mock -h 0.0.0.0 /openapi.yaml
     volumes:
       - ./swagger/openapi.yaml:/openapi.yaml
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: always
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      interval: 10s
+      retries: 10
+      start_period: 10s
+    ports:
+      - "3306:3306"
 
 volumes:
   rails-bundle:

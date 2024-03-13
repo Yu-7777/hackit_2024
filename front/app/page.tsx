@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client'
 import { Box, Button, Center, Container, Heading, Stack, VStack } from "@chakra-ui/react";
 import { FaDoorClosed } from "react-icons/fa";
@@ -27,3 +28,12 @@ export default function Home() {
     </VStack>
   );
 }
+=======
+import Header from "./components/Header";
+
+const Page = () => {
+  return <Header></Header>;
+};
+
+export default Page;
+>>>>>>> main
