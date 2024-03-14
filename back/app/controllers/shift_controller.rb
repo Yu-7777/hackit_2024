@@ -1,16 +1,13 @@
 class ShiftsController < ApplicationController
-  before_action :set_shift, only[:show, :edit, :update, :destroy]
   require 'httpclient'
 
   def show
-    user_id = current_api_v1_user
     shift = Shift.find(params[:id])
 
-    render shift
+    render json: shift
   end
 
   def create
-    user_id = current_api_v1_user
     shift = Shift.new(shift_params)
 
     if shift.save
