@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_14_184830) do
     t.integer "part_time_id"
     t.bigint "user_id", null: false
     t.bigint "part_time_color_id", null: false
+    t.integer "job_id"
     t.index ["part_time_color_id"], name: "index_part_times_on_part_time_color_id"
     t.index ["user_id"], name: "index_part_times_on_user_id"
   end
