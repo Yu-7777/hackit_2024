@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem, Button, ChakraProvider, Box, Text } from "@chakra-ui/react";
 import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import SalaryList from "./SalaryList";
 
 const SideMenu = () => {
   return (
@@ -17,6 +18,7 @@ const SideMenu = () => {
             <MenuItem>期待値の変更</MenuItem>
           </MenuList>
         </Menu>
+        <SalaryList></SalaryList>
       </div>
     </ChakraProvider>
   );

@@ -8,14 +8,14 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // pluginは、あとから
 import { ChakraProvider } from "@chakra-ui/react";
 
 const Page = () => {
-  const [isSideMenuOpen, setIsSideMenuOpen] = useState(true);
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
   };
 
   useEffect(() => {
-    setIsSideMenuOpen(true);
+    setIsSideMenuOpen(false);
   }, []);
 
   return (
