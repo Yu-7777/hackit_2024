@@ -1,0 +1,2 @@
+class PartTimeColorController < ApplicationController
+end
