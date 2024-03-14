@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_14_040225) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_14_045240) do
   create_table "part_time_colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "colorcode"
@@ -23,8 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_14_040225) do
     t.integer "hourly_wage"
     t.integer "transportation_allowance"
     t.integer "Holiday_allowance"
-    t.integer "time_allowance_start"
-    t.integer "time_allowance_end"
+    t.string "time_allowance_start"
+    t.string "time_allowance_end"
     t.integer "target_monthly_income"
     t.integer "closing_date"
     t.integer "transfer_date"
