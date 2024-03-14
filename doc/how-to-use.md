@@ -39,3 +39,17 @@ dockerコンテナに反映させるためには↓↓
 ```bash
 docker compose run front npm install
 ```
+
+### APIサーバへの接続について
+
+APIサーバのホスト名は環境変数で参照すること！
+
+```javascript
+const data = await fetch(`${process.env.API_HOST}/api/v1/test`);
+```
+
+envファイル名は「**.env.development.local**」にし、以下の内容を記述すること。
+
+```text
+API_HOST=http://localhost:3000
+```
