@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_13_182430) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_14_184830) do
   create_table "part_time_colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "colorcode"
@@ -23,14 +23,30 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_182430) do
     t.integer "hourly_wage"
     t.integer "transportation_allowance"
     t.integer "Holiday_allowance"
-    t.integer "time_allowance_start"
-    t.integer "time_allowance_end"
+    t.string "time_allowance_start"
+    t.string "time_allowance_end"
     t.integer "target_monthly_income"
     t.integer "closing_date"
     t.integer "transfer_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "up_manny"
+    t.integer "part_time_id"
+    t.bigint "user_id", null: false
+    t.bigint "part_time_color_id", null: false
+    t.index ["part_time_color_id"], name: "index_part_times_on_part_time_color_id"
+    t.index ["user_id"], name: "index_part_times_on_user_id"
+  end
+
+  create_table "shifts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "shift_id"
+    t.string "shift_title"
+    t.datetime "work_start"
+    t.datetime "work_end"
+    t.integer "rest_time"
+    t.string "shift_memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -52,10 +68,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_182430) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "goal_annual_income"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "part_times", "part_time_colors"
+  add_foreign_key "part_times", "users"
 end
