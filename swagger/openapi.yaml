@@ -147,7 +147,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Shift"
-  "/partTime":
+  "/part_times":
     get:
       tags:
         - "partTime"
@@ -172,6 +172,8 @@ paths:
       tags:
         - "partTime"
       summary: "バイトの新規登録"
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -188,7 +190,7 @@ paths:
                 transportation_allowance:
                   type: integer
                   example: 0
-                holiday_allowance:
+                Holiday_allowance:
                   type: integer
                   example: 0
                 time_allowance_start:
@@ -373,6 +375,10 @@ paths:
                     description: "今月の給与。最終給与がない場合は予想給与を返す"
 
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
   schemas:
     PartTime:
       type: object

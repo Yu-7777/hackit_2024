@@ -1,4 +1,4 @@
-class PartTimeController < ApplicationController
+class PartTimesController < ApplicationController
   before_action :authenticate_api_v1_user!
 
   def create
@@ -19,14 +19,15 @@ class PartTimeController < ApplicationController
       :job_name, # バイト名
       :hourly_wage, # 時給
       :transportation_allowance, # 交通費
-      :holiday_allowance, # 休日手当
+      :Holiday_allowance, # 休日手当
       :time_allowance_start, # 時間外手当開始時間
       :time_allowance_end,  # 時間外手当終了時間
       :target_monthly_income, # 目標月収
       :closing_date,  # 締め日
       :transfer_date, # 振込日
       :up_manny, # 時間外手当時の時給
-      :part_time_color_id # カラーコード
+      :part_time_color_id, # カラーコード
+      :user_id
     )
   end
 end
