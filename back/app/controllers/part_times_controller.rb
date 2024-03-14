@@ -1,6 +1,4 @@
 class PartTimesController < ApplicationController
-  before_action :authenticate_api_v1_user!
-
   def create
     user_id = current_api_v1_user.id
     part_time = PartTime.new(part_time_params)
@@ -8,6 +6,17 @@ class PartTimesController < ApplicationController
 
     if part_time.save
       render json: part_time, status: :created
+    else
+      render json: part_time.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    user_id = current_api_v1_user.id
+    part_time = PartTime.find(params[:id])
+
+    if part_time.user_id == user_id && part_time.update(part_time_params)
+      render json: part_time, status: :ok
     else
       render json: part_time.errors, status: :unprocessable_entity
     end
