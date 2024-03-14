@@ -49,7 +49,7 @@ export default function LoginPage() {
                 password: values.password,
               }
 
-              const response = await fetch("http://localhost:3000/api/v1/auth/sign_in", {
+              const response = await fetch(`${process.env.API_HOST}/api/v1/auth/sign_in`, {
                 method: "POST",
                 mode: "cors",
                 headers: {
