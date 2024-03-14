@@ -28,6 +28,7 @@ services:
     volumes:
       - ./front/app:/myapp/app
       - ./front/public:/myapp/public
+      - ./front/.env.development.local:/myapp/.env.development.local
       - node_modules:/myapp/node_modules
     tty: true
     stdin_open: true
