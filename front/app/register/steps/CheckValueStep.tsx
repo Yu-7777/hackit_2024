@@ -25,7 +25,7 @@ function CheckValueStep(props: {userData:InputData}) {
         goalAnnualIncome: props.userData.goalAnnualIncome
       };
 
-      const response = await fetch(`${process.env.API_HOST}/api/v1/auth`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

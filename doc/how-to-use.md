@@ -45,11 +45,11 @@ docker compose run front npm install
 APIサーバのホスト名は環境変数で参照すること！
 
 ```javascript
-const data = await fetch(`${process.env.API_HOST}/api/v1/test`);
+const data = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/test`);
 ```
 
 envファイル名は「**.env.development.local**」にし、以下の内容を記述すること。
 
 ```text
-API_HOST=http://localhost:3000
+NEXT_PUBLIC_API_HOST=http://localhost:3000
 ```
