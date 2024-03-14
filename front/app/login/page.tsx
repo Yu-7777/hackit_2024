@@ -60,13 +60,9 @@ export default function LoginPage() {
               const data = await response.json();
 
               if (response.ok) {
+                const token = data.access_token;
 
-                const headers = response.headers
-                const accessToken = headers.get('access-token')
-                const client = headers.get('client')
-                const uid = headers.get('uid')
-
-                if (!accessToken || !client || !uid) {
+                if (!token) {
                   toast({
                     title: "ログインエラー",
                     description: "ログイン情報が取得できませんでした",
@@ -77,9 +73,7 @@ export default function LoginPage() {
                   return;
                 }
 
-                localStorage.setItem("access-token", accessToken);
-                localStorage.setItem("client", client);
-                localStorage.setItem("uid", uid);
+                localStorage.setItem("access-token", token);
 
                 console.log("ログイン成功")
 
