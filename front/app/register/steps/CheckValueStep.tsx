@@ -1,5 +1,7 @@
 import { Box, Button, FormControl, FormLabel, Icon, Input, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr, useToast } from "@chakra-ui/react";
 import { Formik, useFormik } from "formik";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BiPaperPlane } from "react-icons/bi";
 
@@ -12,11 +14,51 @@ type InputData = {
 
 function CheckValueStep(props: {userData:InputData}) {
   const toast = useToast();
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {},
-    onSubmit: (values, actions) => {
-      console.log(props.userData);
+    onSubmit: async (values, actions) => {
+      const sendData = {
+        email: props.userData.email,
+        password: props.userData.password,
+        goalAnnualIncome: props.userData.goalAnnualIncome
+      };
+
+      const response = await fetch('http://localhost:3000/api/v1/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sendData)
+      });
+
+      const data = await response.json();
+
+      const redirectUrl = "/login";
+
+      if (data.errors === undefined) {
+        toast({
+          title: "登録完了",
+          description: "登録が完了しました",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        })
+
+        router.push(redirectUrl);
+      } else {
+        data.errors.full_messages.forEach((message: string) => {
+          toast({
+            title: "ログインエラー",
+            description: message,
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+        });
+      }
+
       actions.setSubmitting(false);
     }
   });
