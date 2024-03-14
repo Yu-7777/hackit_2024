@@ -20,7 +20,7 @@ export default function Home() {
       </Stack>
 
       <Box textAlign="center">
-        <Button as="a" colorScheme="teal" size="lg" mt={10} leftIcon={<FaDoorClosed/>} href="/sign-up">
+        <Button as="a" colorScheme="teal" size="lg" mt={10} leftIcon={<FaDoorClosed/>} href="/register">
           はじめる
         </Button>
       </Box>
