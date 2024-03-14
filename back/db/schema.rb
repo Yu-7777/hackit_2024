@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_14_045856) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_14_050701) do
   create_table "part_time_colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "colorcode"
@@ -33,6 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_14_045856) do
     t.integer "up_manny"
     t.integer "part_time_id"
     t.bigint "user_id", null: false
+    t.bigint "part_time_color_id", null: false
+    t.index ["part_time_color_id"], name: "index_part_times_on_part_time_color_id"
     t.index ["user_id"], name: "index_part_times_on_user_id"
   end
 
@@ -72,5 +74,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_14_045856) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "part_times", "part_time_colors"
   add_foreign_key "part_times", "users"
 end
