@@ -179,45 +179,11 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                job_name:
-                  type: string
-                  example: "放課後ティータイム"
-                hourly_wage:
-                  type: integer
-                  example: 1070
-                transportation_allowance:
-                  type: integer
-                  example: 0
-                Holiday_allowance:
-                  type: integer
-                  example: 0
-                time_allowance_start:
-                  type: string
-                  example: "17:00"
-                time_allowance_end:
-                  type: string
-                  example: "20:00"
-                target_monthly_income:
-                  type: integer
-                  example: 100000
-                closing_date:
-                  type: integer
-                  example: 30
-                transfer_date:
-                  type: integer
-                  example: 25
-                up_manny:
-                  type: integer
-                  example: 1312
-                part_time_color_id:
-                  type: integer
-                  example: 1
+              $ref: "#/components/schemas/PartTime"
       responses:
         "200":
           description: "登録が成功した場合"
-  "/partTime/{id}":
+  "/part_times/{id}":
     get:
       tags:
         - "partTime"
@@ -241,6 +207,8 @@ paths:
       tags:
         - "partTime"
       summary: "バイトの詳細に関するデータを更新"
+      security:
+        - BearerAuth: []
       parameters:
         - name: id
           in: path
@@ -383,27 +351,42 @@ components:
     PartTime:
       type: object
       properties:
-        id:
-          type: integer
-          example: 1
-        name:
-          type: string
-          example: "放課後ティータイム"
-        color:
-          type: string
-          example: "#FF0000"
-        closingDate:
-          type: integer
-          example: 0
-          description: "締日。月末の場合は0"
-        payDay:
-          type: integer
-          example: 25
-          description: "支払日"
-        pay:
-          type: integer
-          example: 1070
-          description: "時給"
+        part_time:
+          type: object
+          properties:
+            job_name:
+              type: string
+              example: "放課後ティータイム"
+            hourly_wage:
+              type: integer
+              example: 1070
+            transportation_allowance:
+              type: integer
+              example: 0
+            Holiday_allowance:
+              type: integer
+              example: 0
+            time_allowance_start:
+              type: string
+              example: "17:00"
+            time_allowance_end:
+              type: string
+              example: "20:00"
+            target_monthly_income:
+              type: integer
+              example: 100000
+            closing_date:
+              type: integer
+              example: 30
+            transfer_date:
+              type: integer
+              example: 25
+            up_manny:
+              type: integer
+              example: 1312
+            part_time_color_id:
+              type: integer
+              example: 1
     BillingGoal:
       type: object
       properties:
