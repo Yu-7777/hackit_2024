@@ -23,9 +23,13 @@ def chekc_holiday(data)
   end
 
   def show
+    user_id = current_api_v1_user.id
     shift = Shift.find(params[:id])
 
-    render json: shift.to_json
+    if user_id == part_time.user_id
+      render json: shift.to_json
+    else
+      render json: shift.errors, status: :unprocessable_entity
   end
 
   def create
@@ -35,6 +39,17 @@ def chekc_holiday(data)
 
     if shift.save
       render json: shift.to_json, include: :part_time, status: :created
+    else
+      render json: shift.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    user_id = current_api_v1_user.id
+    shift = Shift.find(params[:id])
+
+    if part_time.user_id == user_id && shift.update(shift_params)
+      render json: shift.to_json, status: :ok
     else
       render json: shift.errors, status: :unprocessable_entity
     end
@@ -52,7 +67,8 @@ def chekc_holiday(data)
       :shift_memo,
       :holiday,
       :job_id,
-      :job_name
+      :job_name,
+      :user_id
     )
   end
 end
