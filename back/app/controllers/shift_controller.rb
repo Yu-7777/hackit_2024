@@ -1,6 +1,20 @@
 class ShiftsController < ApplicationController
   require 'httpclient'
 
+def chekc_holiday(data)
+  client = HTTPClient.new
+  url = "http://api.national-holidays.jp/#{data}"
+  response = client.get(url)
+  res_json = JSON.parse(response.body)
+  res_json.each do |key, value|
+    if key == "name"
+      holiday = value
+    else
+      holiday = null
+    end
+  return holiday
+  end
+
   def show
     shift = Shift.find(params[:id])
 
@@ -8,6 +22,8 @@ class ShiftsController < ApplicationController
   end
 
   def create
+    work_start = shift_params[:work_start]
+    holiday = chekc_holiday(work_start.to_date)
     shift = Shift.new(shift_params)
 
     if shift.save
@@ -26,12 +42,8 @@ class ShiftsController < ApplicationController
       :work_start,
       :work_end,
       :rest_time,
-      :shift_memo
-    )
-  end
-
-  def part_time_params
-    params.require(:part_time).permit(
+      :shift_memo,
+      :holiday,
       :job_id,
       :job_name
     )
