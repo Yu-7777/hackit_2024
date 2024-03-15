@@ -15,12 +15,14 @@ class GachasController < ApplicationController
 
   # POST /gachas
   def create
-    @gacha = Gacha.new(gacha_params)
+    user_id = current_api_v1_user.id
+    gacha = Gacha.find(params[:id])
+    gacha.user_id = user_id
 
-    if @gacha.save
-      render json: @gacha, status: :created, location: @gacha
+    if gacha.save
+      render json: gacha.to_json, status: :created
     else
-      render json: @gacha.errors, status: :unprocessable_entity
+      render json: gacha.errors, status: :unprocessable_entity
     end
   end
 
