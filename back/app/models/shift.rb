@@ -5,7 +5,7 @@ class Shift < ApplicationRecord
     {
       id: shift_id,
       partTimes: {
-        id:   job_id,
+        id:   part_time_id,
         name: job_name
       }
       title: shift_title,

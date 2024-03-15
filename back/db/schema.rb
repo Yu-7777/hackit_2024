@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_15_002658) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_15_140847) do
   create_table "part_time_colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "colorcode"
@@ -34,7 +34,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_15_002658) do
     t.integer "part_time_id"
     t.bigint "user_id", null: false
     t.bigint "part_time_color_id", null: false
-    t.integer "job_id"
     t.index ["part_time_color_id"], name: "index_part_times_on_part_time_color_id"
     t.index ["user_id"], name: "index_part_times_on_user_id"
   end
