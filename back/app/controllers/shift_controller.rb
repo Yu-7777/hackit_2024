@@ -8,14 +8,16 @@ def chekc_holiday(data)
     response = client.get(url)
     res_json = JSON.parse(response.body)
     if res_json.has_key?("error") && res_json["error"] == "not_found"
-      return national
+      return nil
     elsif res_json.has_key?("name")
       return res_json["name"]
     else
+      Rails.logger.erorr "API response format error: #{res_json}"
       return nil
     end
   rescue => e
     return "取得に失敗しました"
+    Rails.logger.error "Error fetching holiday data: #{e}"
   end
 
   def show
