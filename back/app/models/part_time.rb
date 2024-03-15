@@ -2,14 +2,14 @@ class PartTime < ApplicationRecord
     has_many :shits
     belongs_to :part_time_color
 
-    def to_index_part_times_json
+    def index_part_times_to_json
         {
             id: part_time_id,
             name: job_name
-        }.to_json
+        }
     end
 
-    def to_details_part_time_json
+    def details_part_time_to_json
         {
             id: part_time_id,
             name: job_name,
