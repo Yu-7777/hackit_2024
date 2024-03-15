@@ -11,7 +11,7 @@ class ShiftsController < ApplicationController
     shift = Shift.new(shift_params)
 
     if shift.save
-      render json: shift, status: :created
+      render json: shift, include: :part_time, status: :created
     else
       render json: shift.errors, status: :unprocessable_entity
     end
@@ -30,8 +30,8 @@ class ShiftsController < ApplicationController
     )
   end
 
-  def partTimes_params
-    params.require(:partTimes).permit(
+  def part_time_params
+    params.require(:part_time).permit(
       :job_id,
       :job_name
     )
