@@ -25,7 +25,7 @@ def chekc_holiday(data)
   def show
     shift = Shift.find(params[:id])
 
-    render json: shift
+    render json: shift.to_json
   end
 
   def create
@@ -34,7 +34,7 @@ def chekc_holiday(data)
     shift = Shift.new(shift_params.merge(holiday: holiday))
 
     if shift.save
-      render json: shift, include: :part_time, status: :created
+      render json: shift.to_json, include: :part_time, status: :created
     else
       render json: shift.errors, status: :unprocessable_entity
     end
