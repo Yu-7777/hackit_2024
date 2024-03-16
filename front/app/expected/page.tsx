@@ -1,13 +1,25 @@
 "use client";
 
-import React from "react";
-import Circular from "./components/Circular";
+import React, { useEffect, useState } from "react";
+import Circular from "../components/Circular";
 import Header from "../components/Header";
+import SideMenu from "../components/Sidemenu";
 
 const Expected = () => {
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+
+  const toggleSideMenu = () => {
+    setIsSideMenuOpen(!isSideMenuOpen);
+  };
+
+  useEffect(() => {
+    setIsSideMenuOpen(false);
+  }, []);
+
   return (
     <>
-      <Header></Header>
+      <Header isSideMenuOpen={isSideMenuOpen} toggleSideMenu={toggleSideMenu} />
+      {isSideMenuOpen && <SideMenu />}
       <div className="flex flex-col items-center justify-center">
         <div className="mt-4 flex items-end">
           <div className="text-4xl">今月は　</div>
@@ -32,7 +44,9 @@ const Expected = () => {
           <div className="text-4xl">5月</div>
           <div className="text-3xl">6月</div>
         </div>
-        <Circular></Circular>
+        <Circular
+          mtsize = "4"
+        ></Circular>
       </div>
     </>
   );
