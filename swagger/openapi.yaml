@@ -268,6 +268,13 @@ paths:
       responses:
         "200":
           description: "更新が成功した場合"
+    delete:
+      tags:
+        - "billingGoal"
+      summary: "期待値計算の削除"
+      responses:
+        "200":
+          description: "削除が成功した場合"
   "/graph/{year}":
     get:
       tags:
