@@ -65,7 +65,7 @@ def chekc_holiday(data)
       :rest_time,
       :shift_memo,
       :holiday,
-      :job_id,
+      :part_time_id,
       :job_name,
       :user_id
     )
