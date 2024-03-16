@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button,
-  ChakraProvider,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Button, ChakraProvider } from "@chakra-ui/react";
 import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import SalaryList from "./SalaryList";
 import Circular from "./Circular";
@@ -40,7 +33,6 @@ const SideMenu = () => {
           <Circular
             size="250px"
             progressSize="4xl"
-            goalSize="base"
             achievementSize="2xl"
           ></Circular>
         </div>

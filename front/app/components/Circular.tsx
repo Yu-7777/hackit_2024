@@ -1,6 +1,6 @@
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 
-const Circular = ({ size = "350px", progressSize = "6xl", goalSize = "lg", achievementSize = "4xl", mtsize = "1", progress = 40 }) => {
+const Circular = ({ size = "350px", progressSize = "6xl", goalSize = "base", achievementSize = "4xl", mtsize = "1", progress = 40 }) => {
   return (
     <CircularProgress value={progress} color="green.400" size={size} thickness="8px">
       <CircularProgressLabel>
