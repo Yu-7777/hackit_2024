@@ -226,10 +226,12 @@ paths:
       responses:
         "200":
           description: "更新が成功した場合"
-  "/billingGoal":
+  "/billing_goal":
     get:
       tags:
         - "billingGoal"
+      security:
+        - BearerAuth: []
       summary: "期待値計算に関するデータを取得"
       responses:
         "200":
@@ -241,6 +243,8 @@ paths:
     post:
       tags:
         - "billingGoal"
+      security:
+        - BearerAuth: []
       summary: "期待値計算の新規登録"
       requestBody:
         required: true
@@ -250,7 +254,7 @@ paths:
               $ref: "#/components/schemas/BillingGoal"
       responses:
         "200":
-          description: "更新が成功した場合"
+          description: "追加が成功した場合"
     put:
       tags:
         - "billingGoal"
@@ -390,21 +394,26 @@ components:
     BillingGoal:
       type: object
       properties:
-        userId:
-          type: integer
-          example: 1
-          description: "ユーザID"
         title:
           type: string
           example: "誕生日プレゼントガチャ"
         money:
           type: integer
           example: 160
-          description: "1回のガチャにかかる金額"
+          description: "一回あたりのガチャ金額"
         count:
           type: integer
           example: 10
-          description: "ガチャを引く回数"
+          description: "ガチャを引きたい回数"
+        probability:
+          type: integer
+          example: 1
+          description: "目当ての種類の確率（%）"
+        start_date:
+          type: string
+          format: date
+          example: "2022-01-01"
+          description: "貯め始めた日"
         memo:
           type: string
           example: "あずにゃんの誕生日プレゼント"
