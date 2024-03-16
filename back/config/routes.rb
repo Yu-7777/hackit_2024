@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :gachas
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -9,7 +10,12 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      mount_devise_token_auth_for 'User', at: 'auth'
+      mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+        sessions: 'v1/auth/sessions',
+        registrations: 'v1/auth/registrations'
+      }
     end
   end
+
+  resources :part_times
 end
