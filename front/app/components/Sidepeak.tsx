@@ -1,6 +1,8 @@
 import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerContent, DrawerCloseButton, Button, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import InputBox from "./inputBox";
+import ChooseBox from "./ChooseBox";
+import SaveButton from "./SavaButton";
 
 const Sidepeak = ({ headername = "シフトの追加" }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,16 +24,11 @@ const Sidepeak = ({ headername = "シフトの追加" }) => {
             <DrawerCloseButton />
             {headername}
           </DrawerHeader>
-
-          <DrawerBody>
-            <InputBox inputName={"バイト先"} round={""}/>
-          </DrawerBody>
-
+          <ChooseBox titleName={"ブルー"} num={"1"} ></ChooseBox>
+          <ChooseBox titleName={"ブルー"} num={"2"} ></ChooseBox>
+          <ChooseBox titleName={"ブルー"} num={"3"} ></ChooseBox>
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
+            <SaveButton />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

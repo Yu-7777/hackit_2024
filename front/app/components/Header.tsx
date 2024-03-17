@@ -24,6 +24,7 @@ export const Header = ({ isSideMenuOpen, toggleSideMenu } : { isSideMenuOpen : a
     console.log("ボタンがクリックされました");
   };
 
+
   return (
     <header className="h-16 w-full flex items-center px-4 border border-gray-200">
       <div className="order-first">
