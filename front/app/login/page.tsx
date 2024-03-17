@@ -73,6 +73,7 @@ export default function LoginPage() {
                   return;
                 }
 
+                /* ローカルストレージにアクセストークンを設置 */
                 localStorage.setItem("access-token", token);
 
                 console.log("ログイン成功")
