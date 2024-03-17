@@ -2,7 +2,7 @@ class Gacha < ApplicationRecord
 
   def to_json
     {
-      usrId: user_id,
+      userId: user_id,
       title: title,
       money: money,
       count: count,
