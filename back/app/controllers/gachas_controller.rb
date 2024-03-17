@@ -28,7 +28,7 @@ class GachasController < ApplicationController
 
   # PATCH/PUT /gachas/1
   def update
-    user_id = current_api_v1_user
+    user_id = current_api_v1_user.id
     gacha = Gacha.find(params[:id])
 
     if gacha.user_id == user_id && gacha.update(gach_params)
@@ -50,6 +50,7 @@ class GachasController < ApplicationController
         :title,
         :money,
         :count,
+        :probability,
         :memo
       )
     end
