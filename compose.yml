@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   back:
@@ -48,7 +48,6 @@ services:
       SWAGGER_JSON: /openapi.yaml
     depends_on:
       - swagger-api
-    
 
   swagger-api:
     image: stoplight/prism:3

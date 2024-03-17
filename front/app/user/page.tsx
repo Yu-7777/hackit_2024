@@ -1,11 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import FullCalendar from "@fullcalendar/react";
 import Header from "../components/Header";
 import SideMenu from "../components/Sidemenu";
-import dayGridPlugin from "@fullcalendar/daygrid"; // pluginは、あとから
 import { ChakraProvider } from "@chakra-ui/react";
+
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from "@fullcalendar/interaction";
+import jaLocale from "@fullcalendar/core/locales/ja";
+import Sidepeak from "../components/Sidepeak";
 
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -24,9 +28,10 @@ const Page = () => {
       {isSideMenuOpen && <SideMenu />}
       <div className="flex min-h-100vh">
         <div className="flex flex-col flex-grow">
-          <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
+          <FullCalendar plugins={[dayGridPlugin]} locale= "ja" initialView="dayGridMonth" />
         </div>
       </div>
+      <Sidepeak></Sidepeak>
     </>
   );
 };

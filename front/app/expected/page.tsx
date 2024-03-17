@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 import Circular from "../components/Circular";
 import Header from "../components/Header";
 import SideMenu from "../components/Sidemenu";
+import MoneyDisplay from "./components/MoneyDisplay";
+import ChooseMonth from "./components/ChooseMonth";
+import Sidepeak from "./components/SidePeak";
 
 const Expected = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -21,16 +24,7 @@ const Expected = () => {
       <Header isSideMenuOpen={isSideMenuOpen} toggleSideMenu={toggleSideMenu} />
       {isSideMenuOpen && <SideMenu />}
       <div className="flex flex-col items-center justify-center">
-        <div className="mt-4 flex items-end">
-          <div className="text-4xl">今月は　</div>
-          <div className="text-6xl text-blue-600">98765</div>
-          <div className="text-4xl">　稼いでいます！</div>
-        </div>
-        <div className="mt-4 flex items-end">
-          <div className="text-4xl">目標金額まであと　</div>
-          <div className="text-6xl text-blue-600">98765</div>
-          <div className="text-4xl">　円！</div>
-        </div>
+        <MoneyDisplay data={{ earnMoney: 54321, goleMoney: 54321 }} />
         <div className="mt-8 flex">
           <button className="w-16 h-8 rounded-l-lg border border-gray-300 hover:bg-gray-200 flex items-center justify-center text-base">
             年
@@ -39,14 +33,22 @@ const Expected = () => {
             月
           </button>
         </div>
-        <div className="my-4 flex justify-around w-80 h-12 items-end">
-          <div className="text-3xl">4月</div>
-          <div className="text-4xl">5月</div>
-          <div className="text-3xl">6月</div>
-        </div>
+        <ChooseMonth
+          data={{ beforeMonth: "4月", nowMonth: "5月", nextMont: "6月" }}
+        />
         <Circular
-          mtsize = "4"
-        ></Circular>
+          data={{
+            size: "350px",
+            progressSize: "6xl",
+            goalSize: "base",
+            achievementSize: "4xl",
+            mtsize: "4",
+            progress: 40,
+          }}
+        />
+        <div className="mt-4">
+          <Sidepeak></Sidepeak>
+        </div>
       </div>
     </>
   );
