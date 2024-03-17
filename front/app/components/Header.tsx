@@ -14,7 +14,7 @@ import GraySquareButton from "./GraySquareButton";
 import { useDisclosure } from "@chakra-ui/react";
 import React from "react";
 
-export const Header = ({ isSideMenuOpen, toggleSideMenu }) => {
+export const Header = ({ isSideMenuOpen, toggleSideMenu } : { isSideMenuOpen : any, toggleSideMenu : any}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -40,7 +40,7 @@ export const Header = ({ isSideMenuOpen, toggleSideMenu }) => {
         >
           <BsCalendar />
         </GraySquareButton>
-        <GraySquareButton onClick={handleButtonClick}>
+        <GraySquareButton onClick={handleButtonClick} borderRadius="rounded-none">
           <BsGem />
         </GraySquareButton>
         <GraySquareButton

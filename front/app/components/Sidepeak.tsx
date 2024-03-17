@@ -1,15 +1,4 @@
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Input,
-  Button,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerContent, DrawerCloseButton, Button, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import InputBox from "./inputBox";
 
@@ -35,7 +24,7 @@ const Sidepeak = ({ headername = "シフトの追加" }) => {
           </DrawerHeader>
 
           <DrawerBody>
-            <InputBox inputName={"バイト先"}/>
+            <InputBox inputName={"バイト先"} round={undefined}/>
           </DrawerBody>
 
           <DrawerFooter>

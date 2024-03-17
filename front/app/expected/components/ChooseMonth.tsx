@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChooseMonth = ({data}) => {
+const ChooseMonth = ({ data } : { data : any}) => {
   const {beforeMonth, nowMonth, nextMont} = data // dataに値を格納
   return (
     <div className="my-4 flex justify-around w-80 h-12 items-end">

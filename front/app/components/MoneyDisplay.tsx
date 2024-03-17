@@ -1,6 +1,6 @@
 import React from "react";
 
-const MoneyDisplay = ({ titleName, amountMoney }) => {
+const MoneyDisplay = ({ titleName, amountMoney } : { titleName : any, amountMoney : any}) => {
   return (
     <div className="ml-4 flex items-center rounded-md w-48 h-8 border border-gray-300 justify-between">
       <div className="ml-4">{titleName}</div>

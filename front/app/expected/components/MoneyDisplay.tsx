@@ -1,6 +1,6 @@
 import React from "react";
 
-const MoneyDisplay = ({ data }) => {
+const MoneyDisplay = ({ data } : { data : any }) => {
   const {earnMoney, goleMoney} = data //dataに値を格納
   return (
     <>

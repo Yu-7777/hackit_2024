@@ -1,6 +1,12 @@
 import React from "react";
 
-const InputBox = ({ round = "rounded-none", inputName }) => {
+const InputBox = ({
+  round = "rounded-none",
+  inputName,
+}: {
+  round: any;
+  inputName: any;
+}) => {
   return (
     <div
       className={`h-12 border border-gray-200 flex items-center justify-between px-4 ${round} `}

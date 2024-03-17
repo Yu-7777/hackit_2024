@@ -4,7 +4,7 @@ import { BsCurrencyYen, BsCoin, BsPiggyBank } from "react-icons/bs";
 import MoneyDisplay from "./MoneyDisplay";
 import MoneyIcons from "./MoneyIcons";
 
-const MoneyList = ({data}) => {
+const MoneyList = ({ data } : { data : any}) => {
   const {goleMoney, todayMoney, prospectMoney} = data //dataに値を格納
   return (
     <>
