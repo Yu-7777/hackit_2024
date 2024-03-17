@@ -6,17 +6,60 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   SettingsIcon,
+  ChevronDownIcon,
 } from "@chakra-ui/icons";
 import { BsCalendar, BsGem, BsGraphUp } from "react-icons/bs";
 
 import GrayRoundButton from "./GrayRoundButton";
 import GraySquareButton from "./GraySquareButton";
-import { useDisclosure } from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuItem, MenuList, useDisclosure, useToast } from "@chakra-ui/react";
 import React from "react";
+import { useRouter } from "next/navigation";
 
-export const Header = ({ isSideMenuOpen, toggleSideMenu } : { isSideMenuOpen : any, toggleSideMenu : any}) => {
+export const Header = ({ isSideMenuOpen, toggleSideMenu }: {isSideMenuOpen: any, toggleSideMenu: any}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  const toast = useToast();
+  const router = useRouter();
+
+  /* ユーザのログアウト処理を実施する関数 */
+  const userLogout = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/auth/sign_out`, {
+      method: "DELETE",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    });
+
+    if (response.ok) {
+      localStorage.removeItem("access-token");
+
+      toast({
+        title: "ログアウトしました",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      router.push("/login");
+    } else {
+      const data = await response.json();
+      console.log(data);
+      const errorMessages = data.errors;
+
+      errorMessages.forEach((message: string) => {
+        toast({
+          title: "ログアウトエラー",
+          description: message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
+    }
+  }
 
   // Header をエクスポートする
   const handleButtonClick = () => {
@@ -50,7 +93,15 @@ export const Header = ({ isSideMenuOpen, toggleSideMenu } : { isSideMenuOpen : a
           <BsGraphUp />
         </GraySquareButton>
         <div className="ml-8">
-          <GrayRoundButton icon={SettingsIcon} onClick={handleButtonClick} />
+          <Menu isLazy>
+            <MenuButton className="w-12 h-12 rounded-full hover:bg-gray-200">
+              <SettingsIcon boxSize={6} />
+            </MenuButton>
+            <MenuList>
+              <MenuItem as="a" href="/user/edit">設定</MenuItem>
+              <MenuItem as="button" onClick={userLogout}>ログアウト</MenuItem>
+            </MenuList>
+          </Menu>
         </div>
       </div>
     </header>

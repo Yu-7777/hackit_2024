@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import SideMenu from "../components/Sidemenu";
 import { ChakraProvider } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import isUserSignIn from "../utils/isUserSignIn";
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -13,6 +15,11 @@ import Sidepeak from "../components/Sidepeak";
 
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    isUserSignIn(router, localStorage.getItem("access-token"));
+  }, [router]);
 
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);

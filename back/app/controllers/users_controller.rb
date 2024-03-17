@@ -8,8 +8,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-
     render json: @user
   end
 
@@ -42,10 +40,16 @@ class UsersController < ApplicationController
     @user.destroy!
   end
 
+  def is_signed_in
+    res = current_api_v1_user
+    render json: {res: res}, status: :ok
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      user = current_api_v1_user
+      @user = User.find(user.id)
     end
 
     # Only allow a list of trusted parameters through.

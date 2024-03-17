@@ -73,11 +73,17 @@ export default function LoginPage() {
                   return;
                 }
 
+                /* ローカルストレージにアクセストークンを設置 */
                 localStorage.setItem("access-token", token);
 
-                console.log("ログイン成功")
+                toast({
+                  title: "ログインしました",
+                  status: "success",
+                  duration: 3000,
+                  isClosable: true,
+                });
 
-                router.push("/");
+                router.push("/user");
               } else {
                 const errorMessages = data.errors;
 

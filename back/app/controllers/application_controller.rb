@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
 
   before_action :split_tokens
-  before_action :authenticate_api_v1_user!, unless: :devise_controller?
+  before_action :authenticate_api_v1_user!, unless: -> { request.headers['Authorization'].nil? }
 
   private
     def split_tokens
