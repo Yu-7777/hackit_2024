@@ -22,7 +22,7 @@ function CheckValueStep(props: {userData:InputData}) {
       const sendData = {
         email: props.userData.email,
         password: props.userData.password,
-        goalAnnualIncome: props.userData.goalAnnualIncome
+        goal_annual_income: props.userData.goalAnnualIncome
       };
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/auth`, {

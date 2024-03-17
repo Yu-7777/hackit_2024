@@ -4,7 +4,7 @@ import Header from "@/app/components/Header";
 import SideMenu from "@/app/components/Sidemenu";
 import isUserSignIn from "@/app/utils/isUserSignIn";
 import { SettingsIcon } from "@chakra-ui/icons";
-import { VStack, Stack, Heading, FormControl, FormLabel, FormErrorMessage, Button, Box, useToast, Input, Divider, AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, useDisclosure, Icon } from "@chakra-ui/react";
+import { VStack, Stack, Heading, FormControl, FormLabel, FormErrorMessage, Button, Box, useToast, Input, Divider, AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, useDisclosure, Icon, FormHelperText } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useRef } from "react";
@@ -16,7 +16,7 @@ const Page = () => {
   const router = useRouter();
   const toast = useToast();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [goalAnnualIncome, setGoalAnnualIncome] = useState(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<HTMLButtonElement>(null);
@@ -34,6 +34,7 @@ const Page = () => {
       },
     }).then((response) => response.json()).then((data) => {
       setEmail(data.email);
+      setGoalAnnualIncome(data.goal_annual_income);
     });
   }
 
@@ -80,25 +81,6 @@ const Page = () => {
     }
   }
 
-  function validateEmail(value: string) {
-    let error;
-
-    if (!value) 
-      error = "メールアドレスを入力してください";
-    else if (!value.includes("@"))
-      error = "メールアドレスが正しくありません";
-
-    return error;
-  }
-
-  function validatePw(value: string) {
-    let error;
-
-    if (!value) error = "パスワードを入力してください";
-
-    return error;
-  }
-
   return (
     <>
       <Header isSideMenuOpen={isSideMenuOpen} toggleSideMenu={toggleSideMenu} />
@@ -114,12 +96,17 @@ const Page = () => {
         </Box>
         <Box textAlign="center" w="100%">
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ email: "", password: "", goalAnnualIncome: ""}}
             onSubmit={async (values, actions) => {
+              const inputEmail = values.email === "" ? email : values.email;
+              const inputGoalAnnualIncome = values.goalAnnualIncome === "" ? goalAnnualIncome : values.goalAnnualIncome;
               const jsonData = {
-                email: values.email,
+                email: inputEmail,
                 password: values.password,
+                goal_annual_income: inputGoalAnnualIncome,
               }
+
+              console.log(jsonData);
 
               const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/auth`, {
                 method: "PUT",
@@ -160,22 +147,30 @@ const Page = () => {
           >
            {(props) => (
             <Form>
-              <Field name='email' validate={validateEmail}>
+              <Field name='email'>
                 {({field, form}: {field: any, form: any}) => (
-                  <FormControl isInvalid={form.errors.email && form.touched.email}>
+                  <FormControl my={4}>
                     <FormLabel>メールアドレス</FormLabel>
                     <Input {...field} placeholder={email} type="email" />
-                    <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                   </FormControl>
                 )}
               </Field>
 
-              <Field name='password' validate={validatePw}>
+              <Field name='goalAnnualIncome'>
                 {({field, form}: {field: any, form: any}) => (
-                  <FormControl isInvalid={form.errors.password && form.touched.password}>
+                  <FormControl my={4}>
+                    <FormLabel>目標年収</FormLabel>
+                    <Input {...field} type="number" placeholder={goalAnnualIncome} />
+                  </FormControl>
+                )}
+              </Field>
+
+              <Field name='password'>
+                {({field, form}: {field: any, form: any}) => (
+                  <FormControl isRequired my={4}>
                     <FormLabel>パスワード</FormLabel>
                     <Input {...field} placeholder="パスワード" type="password" />
-                    <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                    <FormHelperText>パスワードを変更しない場合でも入力してください。</FormHelperText>
                   </FormControl>
                 )}
               </Field>
