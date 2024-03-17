@@ -70,6 +70,15 @@ paths:
       responses:
         "200":
           description: "新規登録が成功した場合"
+    delete:
+      tags:
+        - "user"
+      summary: "ユーザの削除"
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: "ユーザの削除が成功した場合"
 
   "/calendar":
     get:

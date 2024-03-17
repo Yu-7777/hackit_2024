@@ -83,7 +83,7 @@ export const Header = ({ isSideMenuOpen, toggleSideMenu }: {isSideMenuOpen: any,
         >
           <BsCalendar />
         </GraySquareButton>
-        <GraySquareButton onClick={handleButtonClick}>
+        <GraySquareButton onClick={handleButtonClick} borderRadius="rounded-none">
           <BsGem />
         </GraySquareButton>
         <GraySquareButton
