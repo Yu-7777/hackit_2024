@@ -7,7 +7,7 @@ class Shift < ApplicationRecord
       partTimes: {
         id:   part_time_id,
         name: job_name
-      }
+      },
       title: shift_title,
       start: work_start,
       end: work_end,
