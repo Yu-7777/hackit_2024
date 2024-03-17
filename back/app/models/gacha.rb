@@ -1,5 +1,5 @@
 class Gacha < ApplicationRecord
-
+  belongs_to :user
   def to_json
     {
       usrId: user_id,

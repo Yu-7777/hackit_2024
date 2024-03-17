@@ -1,6 +1,7 @@
 class PartTime < ApplicationRecord
-    has_many :shits
+    has_many :shifts, dependent: :destroy
     belongs_to :part_time_color
+    belongs_to :user
 
     def index_part_times_to_json
         {

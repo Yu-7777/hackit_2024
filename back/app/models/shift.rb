@@ -1,5 +1,5 @@
 class Shift < ApplicationRecord
-  belongs_to :parttime
+  belongs_to :part_time
 
   def to_json
     {
