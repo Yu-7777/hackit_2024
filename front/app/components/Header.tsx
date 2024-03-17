@@ -98,7 +98,7 @@ export const Header = ({ isSideMenuOpen, toggleSideMenu }: {isSideMenuOpen: any,
               <SettingsIcon boxSize={6} />
             </MenuButton>
             <MenuList>
-              <MenuItem as="a" href="/user/setting">設定</MenuItem>
+              <MenuItem as="a" href="/user/edit">設定</MenuItem>
               <MenuItem as="button" onClick={userLogout}>ログアウト</MenuItem>
             </MenuList>
           </Menu>

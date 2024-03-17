@@ -6,9 +6,16 @@ import Header from "../components/Header";
 import SideMenu from "../components/Sidemenu";
 import dayGridPlugin from "@fullcalendar/daygrid"; // pluginは、あとから
 import { ChakraProvider } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import isUserSignIn from "../utils/isUserSignIn";
 
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    isUserSignIn(router, localStorage.getItem("access-token"));
+  }, [router]);
 
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
