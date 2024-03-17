@@ -22,6 +22,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_182249) do
     t.integer "probability"
   end
 
+  create_table "incames", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "yearly_incame"
+    t.integer "monthly_incame"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "part_time_colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "colorcode"
