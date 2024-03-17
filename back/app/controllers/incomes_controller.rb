@@ -9,14 +9,14 @@ class IncomesController < ApplicationController
       # データベースに年収と月収を保存
       income = Income.new(yearly_income: yearly_income, monthly_income: monthly_income)
       if income.save
-        render json: income, status: :ok
+        render json: income.to_json, status: :ok
       else
-        render json: income, status: :unprocessable_entity
+        render json: income.errors, status: :unprocessable_entity
       end
     end
     def index
         incomes = Income.all
-        render json: incomes, status: :ok
+        render json: incomes.to_json, status: :ok
     end
 end
   
