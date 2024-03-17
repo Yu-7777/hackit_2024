@@ -1,8 +1,15 @@
 import React from "react";
-import { Menu, MenuButton, MenuList, MenuItem, Button, ChakraProvider } from "@chakra-ui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Button,
+  ChakraProvider,
+} from "@chakra-ui/react";
 import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import SalaryList from "./SalaryList";
 import Circular from "./Circular";
+import MoneyList from "./MoneyList";
 
 const SideMenu = () => {
   return (
@@ -28,12 +35,23 @@ const SideMenu = () => {
               <MenuItem>期待値の変更</MenuItem>
             </MenuList>
           </Menu>
-          <SalaryList></SalaryList>
+          <MoneyList
+            data={{
+              goleMoney: 50000,
+              todayMoney: 50000,
+              prospectMoney: 50000,
+            }}
+          ></MoneyList>
           <div className="ml-4 mt-8 text-2xl">目標までの達成度</div>
           <Circular
-            size="250px"
-            progressSize="4xl"
-            achievementSize="2xl"
+            data={{
+              size: "250px",
+              progressSize: "4xl",
+              goalSize: "base",
+              achievementSize: "2xl",
+              mtsize: "1",
+              progress: 40,
+            }}
           ></Circular>
         </div>
       </ChakraProvider>
