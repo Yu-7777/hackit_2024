@@ -4,10 +4,12 @@ import Header from "@/app/components/Header";
 import SideMenu from "@/app/components/Sidemenu";
 import isUserSignIn from "@/app/utils/isUserSignIn";
 import { SettingsIcon } from "@chakra-ui/icons";
-import { VStack, Stack, Heading, FormControl, FormLabel, FormErrorMessage, Button, Box, useToast, Input } from "@chakra-ui/react";
+import { VStack, Stack, Heading, FormControl, FormLabel, FormErrorMessage, Button, Box, useToast, Input, Divider, AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, useDisclosure, Icon } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { BsTrash } from "react-icons/bs";
+import { TbTrash } from "react-icons/tb";
 
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -15,6 +17,9 @@ const Page = () => {
   const toast = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
@@ -37,6 +42,43 @@ const Page = () => {
     isUserSignIn(router, localStorage.getItem("access-token"));
     getUserInfo();
   }, [router]);
+
+  const deleteUser = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/auth`, {
+      method: "DELETE",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    });
+    
+    if (response.ok) {
+      localStorage.removeItem("access-token");
+
+      toast({
+        title: "ユーザーを削除しました",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      router.push("/register");
+    } else {
+      const data = await response.json();
+      const errorMessages = data.errors;
+
+      errorMessages.forEach((message: string) => {
+        toast({
+          title: "ユーザー削除エラー",
+          description: message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
+    }
+  }
 
   function validateEmail(value: string) {
     let error;
@@ -150,6 +192,37 @@ const Page = () => {
            )} 
           </Formik>
         </Box>
+        <Divider orientation='horizontal' />
+        <Button colorScheme='red' onClick={onOpen}>
+          ユーザーを削除する <Icon as={BsTrash} ml="2" />
+        </Button>
+
+        <AlertDialog
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                ユーザーを削除する
+              </AlertDialogHeader>
+
+              <AlertDialogBody>
+                本当に削除しますか？今まで登録したデータは全て削除されます。
+              </AlertDialogBody>
+
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={onClose}>
+                  キャンセル
+                </Button>
+                <Button colorScheme='red' onClick={() => deleteUser()} ml={3}>
+                 削除する
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
       </Stack>
     </VStack>
     </>
