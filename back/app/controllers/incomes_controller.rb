@@ -1,7 +1,7 @@
 # app/controllers/incomes_controller.rb
 
 class IncomesController < ApplicationController
-    def record_income
+    def create
       # リクエストボディから年収と月収を取得
       yearly_income = params[:income][:yearly_income].to_i
       monthly_income = params[:income][:monthly_income].to_i
@@ -14,5 +14,9 @@ class IncomesController < ApplicationController
         render json: income, status: :unprocessable_entity
       end
     end
-  end
+    def index
+        incomes = Income.all
+        render json: incomes, status: :ok
+    end
+end
   
