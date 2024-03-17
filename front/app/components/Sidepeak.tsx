@@ -24,7 +24,7 @@ const Sidepeak = ({ headername = "シフトの追加" }) => {
           </DrawerHeader>
 
           <DrawerBody>
-            <InputBox inputName={"バイト先"} round={undefined}/>
+            <InputBox inputName={"バイト先"} round={""}/>
           </DrawerBody>
 
           <DrawerFooter>

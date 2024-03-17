@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import SideMenu from "../components/Sidemenu";
 import MoneyDisplay from "./components/MoneyDisplay";
 import ChooseMonth from "./components/ChooseMonth";
+import Sidepeak from "./components/SidePeak";
 
 const Expected = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -45,6 +46,9 @@ const Expected = () => {
             progress: 40,
           }}
         />
+        <div className="mt-4">
+          <Sidepeak></Sidepeak>
+        </div>
       </div>
     </>
   );
