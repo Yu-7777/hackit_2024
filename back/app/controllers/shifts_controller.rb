@@ -34,14 +34,13 @@ class ShiftsController < ApplicationController
   end
 
   def create
-    work_start = shift_params[:work_start]
-    holiday = chekc_holiday(work_start.to_date)
-    shift = Shift.new(shift_params.merge(holiday: holiday))
+    user_id = current_api_v1_user.id
 
+    shift = Shift.new(shift_params)
+    shift.user_id = user_id
+    
     if shift.save
-      render json: shift.to_json, include: :part_time, status: :created
-    else
-      render json: shift.errors, status: :unprocessable_entity
+      render json: shift, status: :created
     end
   end
 
@@ -59,17 +58,13 @@ class ShiftsController < ApplicationController
   private
   def shift_params
     params.require(:shift).permit(
-      :shift_id,
-      :partTimes,
+      :part_time_id,
       :shift_title,
       :work_start,
       :work_end,
       :rest_time,
       :shift_memo,
-      :holiday,
-      :part_time_id,
-      :job_name,
-      :user_id
+      holiday: ""
     )
   end
 end
