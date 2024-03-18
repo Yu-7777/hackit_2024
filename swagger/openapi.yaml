@@ -360,6 +360,7 @@ paths:
       security:
         - BearerAuth: []
       summary: "期待値計算に関するデータを取得"
+      deprecated: true
       responses:
         "200":
           description: "取得が成功した場合"
@@ -373,6 +374,7 @@ paths:
       security:
         - BearerAuth: []
       summary: "期待値計算の新規登録"
+      deprecated: true
       requestBody:
         required: true
         content:
@@ -386,6 +388,7 @@ paths:
       tags:
         - "billingGoal"
       summary: "期待値計算の更新"
+      deprecated: true
       requestBody:
         required: true
         content:
@@ -396,6 +399,7 @@ paths:
         "200":
           description: "更新が成功した場合"
     delete:
+      deprecated: true
       tags:
         - "billingGoal"
       summary: "期待値計算の削除"
