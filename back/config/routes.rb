@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   end
 
   resources :part_times
+  resources :shifts
 end
