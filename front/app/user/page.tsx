@@ -85,7 +85,7 @@ const Page = () => {
               eventClick={handleEventClick}
             />
           </Skeleton>
-        　<ChooseShift />
+          <ChooseShift />
         </div>
       </div>
     </>
