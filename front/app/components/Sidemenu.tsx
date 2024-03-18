@@ -6,6 +6,7 @@ import {
   MenuItem,
   Button,
   ChakraProvider,
+  MenuGroup,
 } from "@chakra-ui/react";
 import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import Circular from "./Circular";
@@ -13,6 +14,7 @@ import MoneyList from "./MoneyList";
 import SettingMoney from "./Sidemenu/SettingMoney";
 import AddJob from "./Sidemenu/AddJob";
 import AddShift from "./Sidemenu/AddShift";
+import EditJob from "./Sidemenu/EditJob";
 
 const SideMenu = () => {
   return (
@@ -31,9 +33,13 @@ const SideMenu = () => {
               <AddIcon /> 作成
             </MenuButton>
             <MenuList>
-              <MenuItem ><AddJob /></MenuItem>
-              <MenuItem><AddShift /></MenuItem>
-              <MenuItem><SettingMoney /></MenuItem>
+              <MenuGroup title='バイト'>
+                <MenuItem ><AddJob /></MenuItem>
+                <MenuItem><EditJob /></MenuItem>
+              </MenuGroup>
+              <MenuGroup title="シフト">
+                <MenuItem><AddShift /></MenuItem>
+              </MenuGroup>
             </MenuList>
           </Menu>
           <MoneyList
