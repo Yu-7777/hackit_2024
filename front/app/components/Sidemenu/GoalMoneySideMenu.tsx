@@ -5,10 +5,8 @@ import {
   DrawerHeader,
   DrawerContent,
   DrawerCloseButton,
-  Button,
-  useDisclosure,
 } from "@chakra-ui/react";
-import React, { ReactElement } from "react";
+import React from "react";
 import SaveButton from "../SavaButton";
 
 type Props = {

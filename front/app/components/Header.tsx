@@ -3,17 +3,13 @@
 import Image from "next/image";
 import {
   HamburgerIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
   SettingsIcon,
-  ChevronDownIcon,
 } from "@chakra-ui/icons";
 import { BsCalendar, BsGem, BsGraphUp } from "react-icons/bs";
 
 import GrayRoundButton from "./GrayRoundButton";
 import GraySquareButton from "./GraySquareButton";
 import {
-  Button,
   Menu,
   MenuButton,
   MenuItem,

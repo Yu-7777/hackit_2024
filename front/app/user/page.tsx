@@ -13,6 +13,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import jaLocale from "@fullcalendar/core/locales/ja";
 import Sidepeak from "../components/Sidepeak";
 import InputBox from "../components/inputBox";
+import ChooseShift from "../components/ChooseShift";
 
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -52,12 +53,10 @@ const Page = () => {
               { title: 'event 2', date: '2024-03-02', id: '2' },
             ]}
             eventClick={handleEventClick}
-          />
+          />      <ChooseShift />
+
         </div>
       </div>
-      <Sidepeak headerName={"シフトの追加"} openResource={undefined} >
-        <InputBox round={""} inputName={"タイトル"}></InputBox>
-      </Sidepeak>
     </>
   );
 };
