@@ -10,6 +10,8 @@ import {
 import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import Circular from "./Circular";
 import MoneyList from "./MoneyList";
+import SettingMoney from "./Sidemenu/SettingMoney";
+import AddJob from "./Sidemenu/AddJob";
 
 const SideMenu = () => {
   return (
@@ -29,10 +31,8 @@ const SideMenu = () => {
               <AddIcon /> 作成
             </MenuButton>
             <MenuList>
-              <MenuItem>バイト先の追加</MenuItem>
-              <MenuItem>シフトの追加</MenuItem>
-              <MenuItem>目標金額の変更</MenuItem>
-              <MenuItem>期待値の変更</MenuItem>
+              <MenuItem ><AddJob /></MenuItem>
+              <MenuItem><SettingMoney /></MenuItem>
             </MenuList>
           </Menu>
           <MoneyList

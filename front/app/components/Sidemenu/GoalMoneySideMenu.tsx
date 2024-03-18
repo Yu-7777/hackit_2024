@@ -9,21 +9,28 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
-import SaveButton from "./SavaButton";
+import SaveButton from "../SavaButton";
 
 type Props = {
-  openResource: ReactElement;
+  data: {
+    isOpen: boolean;
+    onOpen: () => void;
+    onClose: () => void;
+    btnRef: React.RefObject<HTMLButtonElement>;
+  };
   headerName: string;
+  saveButtonName: string;
   children: React.ReactNode;
 };
 
-const Sidepeak: React.FC<Props> = ({ openResource, headerName, children }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef<HTMLButtonElement>(null);
-
+const GoalMoneySideMenu: React.FC<Props> = ({
+  data: { isOpen, onOpen, onClose, btnRef },
+  headerName,
+  saveButtonName,
+  children,
+}) => {
   return (
     <>
-      {openResource}
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -39,7 +46,7 @@ const Sidepeak: React.FC<Props> = ({ openResource, headerName, children }) => {
           <DrawerBody>{children}</DrawerBody>
 
           <DrawerFooter>
-            <SaveButton />
+            <SaveButton buttonName={saveButtonName} />
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
@@ -47,4 +54,4 @@ const Sidepeak: React.FC<Props> = ({ openResource, headerName, children }) => {
   );
 };
 
-export default Sidepeak;
+export default GoalMoneySideMenu;

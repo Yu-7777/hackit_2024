@@ -12,6 +12,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
 import jaLocale from "@fullcalendar/core/locales/ja";
 import Sidepeak from "../components/Sidepeak";
+import InputBox from "../components/inputBox";
 
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -54,7 +55,9 @@ const Page = () => {
           />
         </div>
       </div>
-      <Sidepeak></Sidepeak>
+      <Sidepeak headerName={"シフトの追加"} openResource={undefined} >
+        <InputBox round={""} inputName={"タイトル"}></InputBox>
+      </Sidepeak>
     </>
   );
 };
