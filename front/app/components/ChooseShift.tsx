@@ -54,7 +54,7 @@ const ChooseShift = (shiftData: any) => {
     
     const diffHour = diff / (1000 * 60 * 60);
 
-    const restHour = rest / 60;
+    const restHour = Number(rest) / 60;
 
     const workHour = diffHour - restHour;
 
