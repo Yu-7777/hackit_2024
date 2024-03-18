@@ -18,5 +18,11 @@ Rails.application.routes.draw do
     end
   end
 
+
+  scope '/users' do
+    get "is_signed_in" => "users#is_signed_in"
+    get "show" => "users#show"
+  end
+
   resources :part_times
 end

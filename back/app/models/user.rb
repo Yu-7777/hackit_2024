@@ -15,4 +15,6 @@ class User < ApplicationRecord
   # has_secure_password
   # validates :password,  presence: true,
   #                       length:   { minimum: 8 }
+  has_many :part_times, dependent: :destroy
+  has_many :gachas, dependent: :destroy
 end

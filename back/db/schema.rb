@@ -17,7 +17,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
   create_table "gachas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.integer "money"
@@ -59,12 +58,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
     t.integer "part_time_id"
     t.bigint "user_id", null: false
     t.bigint "part_time_color_id", null: false
+    t.bigint "shift_id", null: false
     t.index ["part_time_color_id"], name: "index_part_times_on_part_time_color_id"
+    t.index ["shift_id"], name: "index_part_times_on_shift_id"
     t.index ["user_id"], name: "index_part_times_on_user_id"
   end
 
   create_table "shifts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "shift_id"
     t.string "shift_title"
     t.datetime "work_start"
     t.datetime "work_end"
@@ -73,6 +73,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "holiday"
+    t.bigint "user_id", null: false
+    t.bigint "part_time_id", null: false
+    t.index ["part_time_id"], name: "index_shifts_on_part_time_id"
+    t.index ["user_id"], name: "index_shifts_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -103,4 +107,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
 
   add_foreign_key "part_times", "part_time_colors"
   add_foreign_key "part_times", "users"
+  add_foreign_key "shifts", "part_times"
+  add_foreign_key "shifts", "users"
 end
