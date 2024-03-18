@@ -1,10 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-  HamburgerIcon,
-  SettingsIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon, SettingsIcon } from "@chakra-ui/icons";
 import { BsCalendar, BsGem, BsGraphUp } from "react-icons/bs";
 
 import GrayRoundButton from "./GrayRoundButton";
