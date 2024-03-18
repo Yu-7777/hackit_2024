@@ -89,7 +89,7 @@ const SideMenu = ({events, goleMoney}: {events: any, goleMoney: number}) => {
               goalSize: "base",
               achievementSize: "2xl",
               mtsize: "1",
-              progress: Math.round((calcMoneyList().todayMoney / calcMoneyList().prospectMoney) * 100),
+              progress: Math.round((calcMoneyList().todayMoney / calcMoneyList().goleMoney) * 100),
             }}
           ></Circular>
         </div>
