@@ -24,5 +24,5 @@ Rails.application.routes.draw do
     get "show" => "users#show"
   end
 
-  resources :part_times
+  resources :part_times, :shifts, :users, :gachas
 end

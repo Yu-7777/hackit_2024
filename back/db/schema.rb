@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_18_031654) do
   create_table "calendars", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "month"
     t.integer "day"
@@ -71,7 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
     t.string "shift_memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "holiday"
     t.bigint "user_id", null: false
     t.bigint "part_time_id", null: false
     t.index ["part_time_id"], name: "index_shifts_on_part_time_id"
@@ -98,7 +97,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "goal_annual_income"
-    t.integer "goal_monthly_income"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

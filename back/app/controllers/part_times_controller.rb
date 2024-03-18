@@ -3,6 +3,7 @@ class PartTimesController < ApplicationController
     user_id = current_api_v1_user.id
     part_time = PartTime.new(part_time_params)
     part_time.user_id = user_id
+    part_time.part_time_color = PartTimeColor.find(1)
 
     if part_time.save
       render json: part_time, status: :created
@@ -19,6 +20,33 @@ class PartTimesController < ApplicationController
       render json: part_time, status: :ok
     else
       render json: part_time.errors, status: :unprocessable_entity
+    end
+  end
+
+  def index
+    user_id = current_api_v1_user.id
+    part_times = PartTime.where(user_id: user_id)
+
+    render json: part_times.map(&:index_part_times_to_json), status: :ok
+  end
+
+  def show
+    user_id = current_api_v1_user.id
+    part_time = PartTime.find(params[:id])
+
+    if user_id == part_time.user_id
+      render json: part_time.details_part_time_to_json, status: :ok
+    else
+      render json: part_time.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    user_id = current_api_v1_user.id
+    part_times = PartTime.find(params[:id])
+
+    if user_id == part_times.user_id
+      part_times.destroy!
     end
   end
 

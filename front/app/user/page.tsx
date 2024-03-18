@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import SideMenu from "../components/Sidemenu";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Skeleton, Spinner } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import isUserSignIn from "../utils/isUserSignIn";
 
@@ -18,9 +18,41 @@ import ChooseShift from "../components/ChooseShift";
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [calendarData, setCalendarData] = useState<{title: string, date: string, id: string, color: string}[]>([]);
+
+  const fetchCalendarData = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/calendars`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    });
+
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    const calendarData = (await response.json()).calendar.shifts;
+
+    const convertData = calendarData.map((data: any) => {
+      return {
+        title: data.title,
+        date: data.date,
+        id: data.id,
+        color: data.color,
+      };
+    });
+
+    setCalendarData(convertData);
+    setIsLoaded(true);
+
+    console.log(convertData);
+  };
+
 
   React.useEffect(() => {
     isUserSignIn(router, localStorage.getItem("access-token"));
+    fetchCalendarData();
   }, [router]);
 
   const toggleSideMenu = () => {
@@ -45,16 +77,15 @@ const Page = () => {
       {isSideMenuOpen && <SideMenu />}
       <div className="flex min-h-100vh">
         <div className="flex flex-col flex-grow">
-          <FullCalendar
-            plugins={[ dayGridPlugin, interactionPlugin ]}
-            initialView="dayGridMonth"
-            events={[
-              { title: 'event 1', date: '2024-03-10', id: '1' },
-              { title: 'event 2', date: '2024-03-02', id: '2' },
-            ]}
-            eventClick={handleEventClick}
-          />      <ChooseShift />
-
+          <Skeleton isLoaded={isLoaded}>
+            <FullCalendar
+              plugins={[ dayGridPlugin, interactionPlugin ]}
+              initialView="dayGridMonth"
+              events={calendarData}
+              eventClick={handleEventClick}
+            />
+          </Skeleton>
+        　<ChooseShift />
         </div>
       </div>
     </>
