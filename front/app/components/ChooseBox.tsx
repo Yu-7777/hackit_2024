@@ -1,5 +1,5 @@
 import React from "react";
-import { Radio, RadioGroup } from "@chakra-ui/react";
+import { Radio } from "@chakra-ui/react";
 
 const ChooseBox = ({ value, children }: { value: any, children: any }) => {
   return (

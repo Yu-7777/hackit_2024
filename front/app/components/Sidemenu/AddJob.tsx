@@ -1,9 +1,11 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
 import React from "react";
-import InputBox from "../inputBox";
 import GoalMoneySideMenu from "./GoalMoneySideMenu";
+import InputBox from "../inputBox";
 import SelectBox from "../SelectBox";
 import ChooseColor from "./ChooseColor";
+import PayDay from "./PayDay";
+import PayValue from "./PayValue";
 
 const AddJob = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,10 +35,10 @@ const AddJob = () => {
         </SelectBox>
         <InputBox round={""} inputName={"締日"}></InputBox>
         <SelectBox round={""} selectName={"給料日"} selectedName={"翌月20日"}>
-          a
+          <PayDay />
         </SelectBox>
         <SelectBox round={""} selectName={"全期間"} selectedName={"時給1150円"}>
-          a
+          <PayValue />
         </SelectBox>
       </GoalMoneySideMenu>
     </>
