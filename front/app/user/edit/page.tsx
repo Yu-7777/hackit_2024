@@ -106,8 +106,6 @@ const Page = () => {
                 goal_annual_income: inputGoalAnnualIncome,
               }
 
-              console.log(jsonData);
-
               const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/auth`, {
                 method: "PUT",
                 mode: "cors",

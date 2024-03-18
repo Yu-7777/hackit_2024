@@ -58,7 +58,6 @@ export const Header = ({
       router.push("/login");
     } else {
       const data = await response.json();
-      console.log(data);
       const errorMessages = data.errors;
 
       errorMessages.forEach((message: string) => {
@@ -71,12 +70,6 @@ export const Header = ({
         });
       });
     }
-  };
-
-  // Header をエクスポートする
-  const handleButtonClick = () => {
-    // ボタンがクリックされた時の処理
-    console.log("ボタンがクリックされました");
   };
 
   return (

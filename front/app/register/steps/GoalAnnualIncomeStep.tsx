@@ -8,7 +8,6 @@ function GoalAnnualIncomeStep(props: {goalAnnualIncome: number, setGoalAnnualInc
   const formik = useFormik({
     initialValues: {goalAnnualIncome: props.goalAnnualIncome},
     onSubmit: (values, actions) => {
-      console.log(values);
       props.setGoalAnnualIncome(values.goalAnnualIncome);
 
       toast({

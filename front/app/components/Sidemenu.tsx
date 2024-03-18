@@ -44,8 +44,6 @@ const SideMenu = ({events, goleMoney}: {events: any, goleMoney: number}) => {
       return today >= eventDate;
     });
 
-    console.log("todayShifts", todayShifts);
-
     return {
       goleMoney: Math.floor(goleMoney / 12),
       todayMoney: calcMoney(todayShifts),

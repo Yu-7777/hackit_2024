@@ -12,8 +12,6 @@ export default async function isUserSignIn(router: AppRouterInstance, token: str
 
     const data = await res.json();
 
-    console.log(data);
-
     if (!data.res) {
       router.push("/login");
     } 

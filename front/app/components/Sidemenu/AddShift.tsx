@@ -106,7 +106,7 @@ const AddShift = () => {
     });
 
     setPartTimeList(convertData);
-    setPartTime(convertData[0].value);
+    if (convertData.length !== 0) setPartTime(convertData[0].value);
     setIsLoaded(true);
   }
 
