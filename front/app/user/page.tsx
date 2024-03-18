@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import SideMenu from "../components/Sidemenu";
-import { ChakraProvider, Spinner } from "@chakra-ui/react";
+import { ChakraProvider, Skeleton, Spinner } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import isUserSignIn from "../utils/isUserSignIn";
 
@@ -76,15 +76,14 @@ const Page = () => {
       {isSideMenuOpen && <SideMenu />}
       <div className="flex min-h-100vh">
         <div className="flex flex-col flex-grow">
-          {!isLoaded && <Spinner />}
-          {isLoaded && (
+          <Skeleton isLoaded={isLoaded}>
             <FullCalendar
               plugins={[ dayGridPlugin, interactionPlugin ]}
               initialView="dayGridMonth"
               events={calendarData}
               eventClick={handleEventClick}
             />
-          )}
+          </Skeleton>
         </div>
       </div>
       <Sidepeak headerName={"シフトの追加"} openResource={undefined} >
