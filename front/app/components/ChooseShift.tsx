@@ -3,18 +3,17 @@ import SelectBox from "./SelectBox";
 import GoalMoneySideMenu from "./Sidemenu/GoalMoneySideMenu";
 import InputBox from "./inputBox";
 import { Box, Button, Hide, Select, Text, useDisclosure } from "@chakra-ui/react";
-import ChooseJob from "./ChooseJob";
 
-const ChooseShift = (shiftData: any) => {
+const ChooseShift = ({shiftData, setDeletedShiftId}: {shiftData: any, setDeletedShiftId: any}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef<HTMLButtonElement>(null);
 
-  const [title, setTitle] = React.useState(shiftData.shiftData.shift.shift_title);
-  const [start, setStart] = React.useState(shiftData.shiftData.shift.work_start);
-  const [end, setEnd] = React.useState(shiftData.shiftData.shift.work_end);
-  const [rest, setRest] = React.useState(String(shiftData.shiftData.shift.rest_time));
+  const [title, setTitle] = React.useState(shiftData.shift.shift_title);
+  const [start, setStart] = React.useState(shiftData.shift.work_start);
+  const [end, setEnd] = React.useState(shiftData.shift.work_end);
+  const [rest, setRest] = React.useState(String(shiftData.shift.rest_time));
   const [wage, setWage] = React.useState(0);
-  const [memo, setMemo] = React.useState(shiftData.shiftData.shift.shift_memo);
+  const [memo, setMemo] = React.useState(shiftData.shift.shift_memo);
 
   const [partTimeList, setPartTimeList] = React.useState<{value: string, content: string}[]>([]);
   const [partTime, setPartTime] = React.useState("");
@@ -38,11 +37,10 @@ const ChooseShift = (shiftData: any) => {
     });
 
     setPartTimeList(convertData);
-
   }
 
   React.useEffect(() => {
-    setPartTime(String(shiftData.shiftData.part_time.id));
+    setPartTime(String(shiftData.part_time.id));
 
     if (start === "" || end === "" || Number(rest) === 0) return;
 
@@ -58,7 +56,7 @@ const ChooseShift = (shiftData: any) => {
 
     const workHour = diffHour - restHour;
 
-    setWage(shiftData.shiftData.part_time.hourly_wage * workHour);
+    setWage(shiftData.part_time.hourly_wage * workHour);
 
     onOpen();
   }, [shiftData, onOpen, start, end, rest]);
@@ -70,7 +68,7 @@ const ChooseShift = (shiftData: any) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/shifts/${shiftData.shiftData.shift.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_HOST}/shifts/${shiftData.shift.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -88,19 +86,23 @@ const ChooseShift = (shiftData: any) => {
       }),
     });
 
+    setDeletedShiftId(shiftData.shift.id);
+
     onClose();
   };
 
   const deleteSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/shifts/${shiftData.shiftData.shift.id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/shifts/${shiftData.shift.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${localStorage.getItem("access-token")}`,
       },
     });
+
+    setDeletedShiftId(shiftData.shift.id);
 
     onClose();
   }

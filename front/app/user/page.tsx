@@ -10,9 +10,6 @@ import isUserSignIn from "../utils/isUserSignIn";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
-import jaLocale from "@fullcalendar/core/locales/ja";
-import Sidepeak from "../components/Sidepeak";
-import InputBox from "../components/inputBox";
 import ChooseShift from "../components/ChooseShift";
 
 const Page = () => {
@@ -22,6 +19,8 @@ const Page = () => {
   const [calendarData, setCalendarData] = React.useState<{title: string, date: string, id: string, color: string}[]>([]);
   const [chooseId, setChooseId] = React.useState<number>(-1);
   const [shiftData, setShiftData] = React.useState<any>({});
+
+  const [deletedShiftId, setDeletedShiftId] = React.useState<number>(-1);
 
   const fetchCalendarData = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/calendars`, {
@@ -49,11 +48,26 @@ const Page = () => {
     setIsLoaded(true);
   };
 
+  useEffect(() => {
+    if (deletedShiftId === -1) return;
+
+    const newCalendarData = calendarData.filter((data) => {
+      return data.id !== String(deletedShiftId);
+    });
+
+    setCalendarData(newCalendarData);
+    setDeletedShiftId(-1);
+  }, [deletedShiftId, calendarData]);
+
 
   React.useEffect(() => {
     isUserSignIn(router, localStorage.getItem("access-token"));
     fetchCalendarData();
   }, [router]);
+
+  useEffect(() => {
+    fetchCalendarData();
+  }, [deletedShiftId]);
 
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
@@ -97,7 +111,7 @@ const Page = () => {
           </Skeleton>
         </div>
       </div>
-      {chooseId !== -1 && !isSideMenuOpen && <ChooseShift shiftData={shiftData} />}
+      {chooseId !== -1 && !isSideMenuOpen && <ChooseShift shiftData={shiftData} setDeletedShiftId={setDeletedShiftId} />}
     </>
   );
 };
