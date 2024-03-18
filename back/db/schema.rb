@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
   create_table "gachas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.integer "money"
@@ -58,9 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
     t.integer "part_time_id"
     t.bigint "user_id", null: false
     t.bigint "part_time_color_id", null: false
-    t.bigint "shift_id", null: false
     t.index ["part_time_color_id"], name: "index_part_times_on_part_time_color_id"
-    t.index ["shift_id"], name: "index_part_times_on_shift_id"
     t.index ["user_id"], name: "index_part_times_on_user_id"
   end
 
@@ -99,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_17_183024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "goal_annual_income"
+    t.integer "goal_monthly_income"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
