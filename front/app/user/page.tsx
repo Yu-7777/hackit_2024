@@ -29,18 +29,43 @@ const Page = () => {
     setIsSideMenuOpen(false);
   }, []);
 
+  function handleDateClick(arg: any) {
+    alert('date click! ' + arg.dateStr)
+  }
+
+  function handleEventClick(arg: any) {
+    alert('event click! ' + arg.event.id)
+  }
+
   return (
     <>
       <Header isSideMenuOpen={isSideMenuOpen} toggleSideMenu={toggleSideMenu} />
       {isSideMenuOpen && <SideMenu />}
       <div className="flex min-h-100vh">
         <div className="flex flex-col flex-grow">
-          <FullCalendar plugins={[dayGridPlugin]} locale= "ja" initialView="dayGridMonth" />
+          <FullCalendar
+            plugins={[ dayGridPlugin, interactionPlugin ]}
+            initialView="dayGridMonth"
+            events={[
+              { title: 'event 1', date: '2024-03-10', id: '1' },
+              { title: 'event 2', date: '2024-03-02', id: '2' },
+            ]}
+            eventClick={handleEventClick}
+          />
         </div>
       </div>
       <Sidepeak></Sidepeak>
     </>
   );
 };
+
+function renderEventContent(eventInfo: any) {
+  return(
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
+    </>
+  )
+}
 
 export default Page;
