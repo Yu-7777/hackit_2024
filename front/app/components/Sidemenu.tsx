@@ -16,7 +16,6 @@ import AddJob from "./Sidemenu/AddJob";
 const SideMenu = () => {
   return (
     <>
-      <ChakraProvider>
         <div
           className="w-72 h-screen border border-gray-200 z-10 absolute"
           style={{ background: "#fff" }}
@@ -54,7 +53,6 @@ const SideMenu = () => {
             }}
           ></Circular>
         </div>
-      </ChakraProvider>
     </>
   );
 };

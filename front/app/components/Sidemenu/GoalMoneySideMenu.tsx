@@ -5,6 +5,8 @@ import {
   DrawerHeader,
   DrawerContent,
   DrawerCloseButton,
+  DrawerOverlay,
+  Button,
 } from "@chakra-ui/react";
 import React from "react";
 import SaveButton from "../SavaButton";
@@ -33,6 +35,7 @@ const GoalMoneySideMenu: React.FC<Props> = ({
         onClose={onClose}
         finalFocusRef={btnRef}
       >
+        <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader className="flex justify-between items-center bg-gray-200">
             <DrawerCloseButton />

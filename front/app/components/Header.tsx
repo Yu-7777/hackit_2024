@@ -17,6 +17,7 @@ import {
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import SideMenu from "./Sidemenu";
 
 export const Header = ({
   isSideMenuOpen,
@@ -79,45 +80,47 @@ export const Header = ({
   };
 
   return (
-    <header className="h-16 w-full flex items-center px-4 border border-gray-200">
-      <div className="order-first">
-        <GrayRoundButton icon={HamburgerIcon} onClick={toggleSideMenu} />
-      </div>
-      <div className="flex items-center ml-4">
-        <Image src="/Q.png" alt="Q" width={32} height={32} />
-        <p className="text-3xl ml-4">Q-ON!</p>
-      </div>
-      <div className="md:ml-auto flex justify-center">
-        <Link href="/user">
-          <GraySquareButton borderRadius="rounded-l-lg">
-            <BsCalendar />
-          </GraySquareButton>
-        </Link>
-        <Link href="/expected">
-          <GraySquareButton borderRadius="rounded-none">
-            <BsGem />
-          </GraySquareButton>
-        </Link>
-        <GraySquareButton borderRadius="rounded-r-lg">
-          <BsGraphUp />
-        </GraySquareButton>
-        <div className="ml-8">
-          <Menu isLazy>
-            <MenuButton className="w-12 h-12 rounded-full hover:bg-gray-200">
-              <SettingsIcon boxSize={6} />
-            </MenuButton>
-            <MenuList>
-              <MenuItem as="a" href="/user/edit">
-                設定
-              </MenuItem>
-              <MenuItem as="button" onClick={userLogout}>
-                ログアウト
-              </MenuItem>
-            </MenuList>
-          </Menu>
+    <>
+      <header className="h-16 w-full flex items-center px-4 border border-gray-200">
+        <div className="order-first">
+          <GrayRoundButton icon={HamburgerIcon} onClick={toggleSideMenu} />
         </div>
-      </div>
-    </header>
+        <div className="flex items-center ml-4">
+          <Image src="/Q.png" alt="Q" width={32} height={32} />
+          <p className="text-3xl ml-4">Q-ON!</p>
+        </div>
+        <div className="md:ml-auto flex justify-center">
+          <Link href="/user">
+            <GraySquareButton borderRadius="rounded-l-lg">
+              <BsCalendar />
+            </GraySquareButton>
+          </Link>
+          <Link href="/expected">
+            <GraySquareButton borderRadius="rounded-none">
+              <BsGem />
+            </GraySquareButton>
+          </Link>
+          <GraySquareButton borderRadius="rounded-r-lg">
+            <BsGraphUp />
+          </GraySquareButton>
+          <div className="ml-8">
+            <Menu isLazy>
+              <MenuButton className="w-12 h-12 rounded-full hover:bg-gray-200">
+                <SettingsIcon boxSize={6} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem as="a" href="/user/edit">
+                  設定
+                </MenuItem>
+                <MenuItem as="button" onClick={userLogout}>
+                  ログアウト
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </div>
+        </div>
+      </header>
+    </>
   );
 };
 

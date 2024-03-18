@@ -11,7 +11,7 @@ class Shift < ApplicationRecord
 
   def show_shifts_to_json
     {
-      part_time_id: part_time_id,
+      part_time: PartTime.find(part_time_id),
       shift: self
     }
   end
