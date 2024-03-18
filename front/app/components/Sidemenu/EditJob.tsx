@@ -95,6 +95,30 @@ const EditJob = () => {
     }
   };
 
+  const deleteSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/part_times/${partTime}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    });
+
+    if (res.ok) {
+      toast({
+        title: "バイト先を削除しました",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+      onClose();
+
+      window.location.reload();
+    }
+  }
+
   const getPartTimeDetail = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/part_times/${partTime}`, {
       method: "GET",
@@ -193,6 +217,14 @@ const EditJob = () => {
                 type="submit"
               >
                 編集
+              </Button>
+            </Box>
+          </form>
+
+          <form onSubmit={deleteSubmit}>
+            <Box textAlign="center">
+              <Button mt={4} colorScheme="red" type="submit">
+                削除
               </Button>
             </Box>
           </form>
