@@ -41,6 +41,15 @@ class PartTimesController < ApplicationController
     end
   end
 
+  def destroy
+    user_id = current_api_v1_user.id
+    part_times = PartTime.find(params[:id])
+
+    if user_id == part_times.user_id
+      part_times.destroy!
+    end
+  end
+
   private
   def part_time_params
     params.require(:part_time).permit(

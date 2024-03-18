@@ -97,7 +97,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_18_031654) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "goal_annual_income"
-    t.integer "goal_monthly_income"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
