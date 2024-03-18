@@ -10,7 +10,7 @@ const SettingMoney = () => {
 
   return (
     <>
-      <Button width="200px" colorScheme="white" textColor="black" ref={btnRef} onClick={onOpen}>
+      <Button width="200px" colorScheme="white" textColor="black" fontWeight="nomal" ref={btnRef} onClick={onOpen}>
         目標金額の変更
       </Button>
 

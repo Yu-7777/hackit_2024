@@ -13,14 +13,14 @@ import SaveButton from "../SavaButton";
 
 type Props = {
   data: {
-    isOpen: boolean,
-    onOpen: () => void,
-    onClose: () => void,
-    btnRef: React.RefObject<HTMLButtonElement>,
-  },
-  headerName: string,
-  saveButtonName: string,
-  children: React.ReactNode,
+    isOpen: boolean;
+    onOpen: () => void;
+    onClose: () => void;
+    btnRef: React.RefObject<HTMLButtonElement>;
+  };
+  headerName: string;
+  saveButtonName: string;
+  children: React.ReactNode;
 };
 
 const GoalMoneySideMenu: React.FC<Props> = ({
@@ -29,7 +29,6 @@ const GoalMoneySideMenu: React.FC<Props> = ({
   saveButtonName,
   children,
 }) => {
-
   return (
     <>
       <Drawer

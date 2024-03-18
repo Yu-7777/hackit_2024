@@ -1,20 +1,37 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Button } from "@chakra-ui/react";
+import { ChevronRightIcon } from "@chakra-ui/icons";
+import { Button, useDisclosure } from "@chakra-ui/react";
+import React from "react";
 
-const SelectBox = ({ round, selectName, selectedName} : { round : any, selectName : any, selectedName : any }) => {
-  
+const SelectBox = ({
+  round,
+  selectName,
+  selectedName,
+  children,
+}: {
+  round: any;
+  selectName: any;
+  selectedName: any;
+  children: any;
+}) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef<HTMLButtonElement>(null);
+
   return (
     <div
       className={`h-12 border border-gray-200 flex items-center justify-between px-4 ${round} `}
     >
       <span className="w-20">{selectName}</span>
       <Button
-        rightIcon={<ArrowForwardIcon />}
+        rightIcon={<ChevronRightIcon />}
         colorScheme="white"
-        variant="outline"
+        textColor="black"
+        fontWeight="nomal"
+        ref={btnRef}
+        onClick={onOpen}
       >
         {selectedName}
       </Button>
+      {children}
     </div>
   );
 };
