@@ -10,16 +10,17 @@ import isUserSignIn from "../utils/isUserSignIn";
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
-import jaLocale from "@fullcalendar/core/locales/ja";
-import Sidepeak from "../components/Sidepeak";
-import InputBox from "../components/inputBox";
 import ChooseShift from "../components/ChooseShift";
 
 const Page = () => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [calendarData, setCalendarData] = useState<{title: string, date: string, id: string, color: string}[]>([]);
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [calendarData, setCalendarData] = React.useState<{title: string, date: string, id: string, color: string}[]>([]);
+  const [chooseId, setChooseId] = React.useState<number>(-1);
+  const [shiftData, setShiftData] = React.useState<any>({});
+
+  const [deletedShiftId, setDeletedShiftId] = React.useState<number>(-1);
 
   const fetchCalendarData = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/calendars`, {
@@ -45,9 +46,18 @@ const Page = () => {
 
     setCalendarData(convertData);
     setIsLoaded(true);
-
-    console.log(convertData);
   };
+
+  useEffect(() => {
+    if (deletedShiftId === -1) return;
+
+    const newCalendarData = calendarData.filter((data) => {
+      return data.id !== String(deletedShiftId);
+    });
+
+    setCalendarData(newCalendarData);
+    setDeletedShiftId(-1);
+  }, [deletedShiftId, calendarData]);
 
 
   React.useEffect(() => {
@@ -55,20 +65,34 @@ const Page = () => {
     fetchCalendarData();
   }, [router]);
 
+  useEffect(() => {
+    fetchCalendarData();
+  }, [deletedShiftId]);
+
   const toggleSideMenu = () => {
     setIsSideMenuOpen(!isSideMenuOpen);
+    setChooseId(-1);
   };
 
   useEffect(() => {
     setIsSideMenuOpen(false);
   }, []);
 
-  function handleDateClick(arg: any) {
-    alert('date click! ' + arg.dateStr)
-  }
+  async function handleEventClick(arg: any) {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/shifts/${arg.event.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    });
 
-  function handleEventClick(arg: any) {
-    alert('event click! ' + arg.event.id)
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    const shiftData = await response.json();
+
+    setChooseId(arg.event.id);
+    setShiftData(shiftData);
   }
 
   return (
@@ -85,20 +109,11 @@ const Page = () => {
               eventClick={handleEventClick}
             />
           </Skeleton>
-        　<ChooseShift />
         </div>
       </div>
+      {chooseId !== -1 && !isSideMenuOpen && <ChooseShift shiftData={shiftData} setDeletedShiftId={setDeletedShiftId} />}
     </>
   );
 };
-
-function renderEventContent(eventInfo: any) {
-  return(
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  )
-}
 
 export default Page;

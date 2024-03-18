@@ -23,7 +23,7 @@ class ShiftsController < ApplicationController
   end
 
   def show
-    user_id == current_api_v1_user.id
+    user_id = current_api_v1_user.id
     shift = Shift.find(params[:id])
 
     if user_id == shift.user_id

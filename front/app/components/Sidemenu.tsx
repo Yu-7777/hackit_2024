@@ -12,11 +12,11 @@ import Circular from "./Circular";
 import MoneyList from "./MoneyList";
 import SettingMoney from "./Sidemenu/SettingMoney";
 import AddJob from "./Sidemenu/AddJob";
+import AddShift from "./Sidemenu/AddShift";
 
 const SideMenu = () => {
   return (
     <>
-      <ChakraProvider>
         <div
           className="w-72 h-screen border border-gray-200 z-10 absolute"
           style={{ background: "#fff" }}
@@ -32,6 +32,7 @@ const SideMenu = () => {
             </MenuButton>
             <MenuList>
               <MenuItem ><AddJob /></MenuItem>
+              <MenuItem><AddShift /></MenuItem>
               <MenuItem><SettingMoney /></MenuItem>
             </MenuList>
           </Menu>
@@ -54,7 +55,6 @@ const SideMenu = () => {
             }}
           ></Circular>
         </div>
-      </ChakraProvider>
     </>
   );
 };
