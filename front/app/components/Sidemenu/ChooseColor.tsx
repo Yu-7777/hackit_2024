@@ -9,16 +9,10 @@ const ChooseColor = () => {
 
   return (
     <>
-      <GoalMoneySideMenu
-        data={{ isOpen, onOpen, onClose, btnRef }}
-        headerName={"掲示色の選択"}
-        saveButtonName={"保存"}
-      >
-        <ChooseBox>レッド</ChooseBox>
-        <ChooseBox>ブルー</ChooseBox>
-        <ChooseBox>イエロー</ChooseBox>
-        <ChooseBox>グリーン</ChooseBox>
-      </GoalMoneySideMenu>
+      <ChooseBox>レッド</ChooseBox>
+      <ChooseBox>ブルー</ChooseBox>
+      <ChooseBox>イエロー</ChooseBox>
+      <ChooseBox>グリーン</ChooseBox>
     </>
   );
 };

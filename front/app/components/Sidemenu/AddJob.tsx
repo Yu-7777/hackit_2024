@@ -15,7 +15,7 @@ const AddJob = () => {
         width="200px"
         colorScheme="white"
         textColor="black"
-        fontWeight="nomal"
+        fontWeight="normal"
         ref={btnRef}
         onClick={onOpen}
       >
