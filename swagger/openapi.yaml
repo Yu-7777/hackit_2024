@@ -559,23 +559,26 @@ components:
           example: "あずにゃんの誕生日プレゼント"
     Shift:
       properties:
-        part_time_id:
-          type: integer
-          example: 1
-        shift_title:
-          type: string
-          example: "バンド練習"
-        work_start:
-          type: string
-          format: date-time
-          example: "2022-01-01T10:00:00"
-        work_end:
-          type: string
-          format: date-time
-          example: "2022-01-01T18:00:00"
-        rest_time:
-          type: integer
-          example: 60
-        shift_memo:
-          type: string
-          example: "バンド練習です"
+        shift:
+          type: object
+          properties:
+            part_time_id:
+              type: integer
+              example: 1
+            shift_title:
+              type: string
+              example: "バンド練習"
+            work_start:
+              type: string
+              format: date-time
+              example: "2022-01-01T10:00:00"
+            work_end:
+              type: string
+              format: date-time
+              example: "2022-01-01T18:00:00"
+            rest_time:
+              type: integer
+              example: 60
+            shift_memo:
+              type: string
+              example: "バンド練習です"
