@@ -12,6 +12,7 @@ import Circular from "./Circular";
 import MoneyList from "./MoneyList";
 import SettingMoney from "./Sidemenu/SettingMoney";
 import AddJob from "./Sidemenu/AddJob";
+import AddShift from "./Sidemenu/AddShift";
 
 const SideMenu = () => {
   return (
@@ -31,6 +32,7 @@ const SideMenu = () => {
             </MenuButton>
             <MenuList>
               <MenuItem ><AddJob /></MenuItem>
+              <MenuItem><AddShift /></MenuItem>
               <MenuItem><SettingMoney /></MenuItem>
             </MenuList>
           </Menu>
