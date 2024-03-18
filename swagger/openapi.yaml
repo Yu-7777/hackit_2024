@@ -80,11 +80,13 @@ paths:
         "200":
           description: "ユーザの削除が成功した場合"
 
-  "/calendar":
+  "/calendars":
     get:
       tags:
         - "calendar"
       summary: "カレンダーの表示に関するデータを取得"
+      security:
+        - BearerAuth: []
       responses:
         "200":
           description: "取得が成功した場合"
@@ -121,7 +123,7 @@ paths:
                               color:
                                 type: string
                                 example: "#FF0000"
-                  goalMonthlyIncome::
+                  goalMonthlyIncome:
                     type: integer
                     description: "目標金額"
                     example: 50000
@@ -137,7 +139,23 @@ paths:
                     type: integer
                     description: "期待値金額"
                     example: 20000
-  "/shift/{id}":
+  "/shifts":
+    post:
+      tags:
+        - "shift"
+      summary: "シフトの新規登録"
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Shift"
+      responses:
+        "200":
+          description: "登録が成功した場合"
+  "/shifts/{id}":
     get:
       tags:
         - "shift"
@@ -160,6 +178,8 @@ paths:
     get:
       tags:
         - "partTime"
+      security:
+        - BearerAuth: []
       summary: "バイトの一覧に関するデータを取得"
       responses:
         "200":
@@ -196,6 +216,8 @@ paths:
     get:
       tags:
         - "partTime"
+      security:
+        - BearerAuth: []
       summary: "バイトの詳細に関するデータを取得"
       parameters:
         - name: id
@@ -435,32 +457,23 @@ components:
           example: "あずにゃんの誕生日プレゼント"
     Shift:
       properties:
-        id:
+        part_time_id:
           type: integer
           example: 1
-        partTimes:
-          type: object
-          properties:
-            id:
-              type: integer
-              example: 1
-            name:
-              type: string
-              example: "放課後ティータイム"
-        title: 
+        shift_title:
           type: string
           example: "バンド練習"
-        start:
+        work_start:
           type: string
           format: date-time
           example: "2022-01-01T10:00:00"
-        end:
+        work_end:
           type: string
           format: date-time
           example: "2022-01-01T18:00:00"
-        restTime:
+        rest_time:
           type: integer
           example: 60
-        memo:
+        shift_memo:
           type: string
-          example: "あずにゃんに向けた歌詞を考える！！"
+          example: "バンド練習です"
