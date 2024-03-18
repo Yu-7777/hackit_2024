@@ -1,18 +1,29 @@
-import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerContent, DrawerCloseButton, Button, useDisclosure } from "@chakra-ui/react";
-import React from "react";
-import InputBox from "./inputBox";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerContent,
+  DrawerCloseButton,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
+import React, { ReactElement } from "react";
 import SaveButton from "./SavaButton";
-import SelectBox from "./SelectBox";
 
-const Sidepeak = ({ headername = "シフトの追加" }) => {
+type Props = {
+  openResource: ReactElement;
+  headerName: string;
+  children: React.ReactNode;
+};
+
+const Sidepeak: React.FC<Props> = ({ openResource, headerName, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef<HTMLButtonElement>(null);
 
   return (
     <>
-      <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-        Open
-      </Button>
+      {openResource}
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -22,19 +33,10 @@ const Sidepeak = ({ headername = "シフトの追加" }) => {
         <DrawerContent>
           <DrawerHeader className="flex justify-between items-center bg-gray-200">
             <DrawerCloseButton />
-            {headername}
+            {headerName}
           </DrawerHeader>
 
-          <DrawerBody>
-            <SelectBox inputName={"バイト先"} round={""}/>
-            <InputBox inputName={"タイトル"} round={""}/>
-            <InputBox inputName={"開始時間"} round={""}/>
-            <InputBox inputName={"終了時間"} round={""}/>
-            <InputBox inputName={"休憩時間"} round={""}/>
-            <InputBox inputName={"給料"} round={""}/>
-            <InputBox inputName={"個別設定"} round={""}/>
-            <InputBox inputName={"メモ"} round={""}/>
-          </DrawerBody>
+          <DrawerBody>{children}</DrawerBody>
 
           <DrawerFooter>
             <SaveButton />
