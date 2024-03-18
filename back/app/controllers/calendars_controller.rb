@@ -21,11 +21,7 @@ class CalendarsController < ApplicationController
     end
 
     json_data = {
-      calendar: [
-        {
-          shifts: shifts
-        }
-      ],
+      calendar: { shifts: convert_shifts },
       goalAnnualIncome: current_api_v1_user.goal_annual_income
     }
 
