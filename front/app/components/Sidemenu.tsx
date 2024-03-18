@@ -11,12 +11,48 @@ import {
 import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import Circular from "./Circular";
 import MoneyList from "./MoneyList";
-import SettingMoney from "./Sidemenu/SettingMoney";
 import AddJob from "./Sidemenu/AddJob";
 import AddShift from "./Sidemenu/AddShift";
 import EditJob from "./Sidemenu/EditJob";
 
-const SideMenu = () => {
+const SideMenu = ({events, goleMoney}: {events: any, goleMoney: number}) => {
+  const calcMoneyList = () => {
+    const calcMoney = (shifts: any) => {
+      let val = 0;
+
+      for (const event of shifts) {
+        const startHour = Number(event.work_start.split(":")[0]);
+        const startMinute = Number(event.work_start.split(":")[1]);
+        const endHour = Number(event.work_end.split(":")[0]);
+        const endMinute = Number(event.work_end.split(":")[1]);
+
+        const start = startHour * 60 + startMinute;
+        const end = endHour * 60 + endMinute;
+
+        const diffHour = (end - start) / 60;
+
+        val += diffHour * event.part_time.hourly_wage;
+      }
+
+      return val;
+    }
+
+    const todayShifts = events.filter((event: any) => {
+      const today = new Date();
+      const eventDate = new Date(event.date);
+
+      return today >= eventDate;
+    });
+
+    console.log("todayShifts", todayShifts);
+
+    return {
+      goleMoney: Math.floor(goleMoney / 12),
+      todayMoney: calcMoney(todayShifts),
+      prospectMoney: calcMoney(events),
+    }
+  }
+
   return (
     <>
         <div
@@ -43,11 +79,7 @@ const SideMenu = () => {
             </MenuList>
           </Menu>
           <MoneyList
-            data={{
-              goleMoney: 50000,
-              todayMoney: 50000,
-              prospectMoney: 50000,
-            }}
+            data={calcMoneyList()}
           ></MoneyList>
           <div className="ml-4 mt-8 text-2xl">目標までの達成度</div>
           <Circular
@@ -57,7 +89,7 @@ const SideMenu = () => {
               goalSize: "base",
               achievementSize: "2xl",
               mtsize: "1",
-              progress: 40,
+              progress: Math.round((calcMoneyList().todayMoney / calcMoneyList().prospectMoney) * 100),
             }}
           ></Circular>
         </div>

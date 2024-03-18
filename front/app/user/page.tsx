@@ -19,6 +19,7 @@ const Page = () => {
   const [calendarData, setCalendarData] = React.useState<{title: string, date: string, id: string, color: string}[]>([]);
   const [chooseId, setChooseId] = React.useState<number>(-1);
   const [shiftData, setShiftData] = React.useState<any>({});
+  const [goleMoney, setGoleMoney] = React.useState<number>(0);
 
   const [deletedShiftId, setDeletedShiftId] = React.useState<number>(-1);
 
@@ -33,18 +34,12 @@ const Page = () => {
 
     if (!response.ok) throw new Error("Network response was not ok");
 
-    const calendarData = (await response.json()).calendar.shifts;
+    const data = await response.json();
 
-    const convertData = calendarData.map((data: any) => {
-      return {
-        title: data.title,
-        date: data.date,
-        id: data.id,
-        color: data.color,
-      };
-    });
+    const calendarData = data.calendar.shifts;
 
-    setCalendarData(convertData);
+    setCalendarData(calendarData);
+    setGoleMoney(data.goalAnnualIncome * 10000);
     setIsLoaded(true);
   };
 
@@ -98,7 +93,7 @@ const Page = () => {
   return (
     <>
       <Header isSideMenuOpen={isSideMenuOpen} toggleSideMenu={toggleSideMenu} />
-      {isSideMenuOpen && <SideMenu />}
+      {isSideMenuOpen && <SideMenu events={calendarData} goleMoney={goleMoney} />}
       <div className="flex min-h-100vh">
         <div className="flex flex-col flex-grow">
           <Skeleton isLoaded={isLoaded}>

@@ -13,10 +13,17 @@ class CalendarsController < ApplicationController
     convert_shifts = []
     shifts.each do |shift|
       convert_shifts.push({
-        "id": shift.id,
-        "title": shift.shift_title,
-        "color": shift.part_time.part_time_color.colorcode,
-        "date": shift.work_start.strftime("%Y-%m-%d"),
+        id: shift.id,
+        title: shift.shift_title,
+        color: shift.part_time.part_time_color.colorcode,
+        date: shift.work_start.strftime("%Y-%m-%d"),
+        end_date: shift.work_end.strftime("%Y-%m-%d"),
+        work_start: shift.work_start.strftime("%H:%M"),
+        work_end: shift.work_end.strftime("%H:%M"),
+        part_time: {
+          id: shift.part_time.id,
+          hourly_wage: shift.part_time.hourly_wage,
+        }
     })
     end
 
