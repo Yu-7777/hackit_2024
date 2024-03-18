@@ -311,6 +311,7 @@ paths:
       tags:
         - "graph"
       summary: "年間のグラフに関するデータを取得"
+      deprecated: true
       parameters:
         - name: year
           in: path
@@ -352,6 +353,7 @@ paths:
       tags:
         - "graph"
       summary: "月間のグラフに関するデータを取得"
+      deprecated: true
       parameters:
         - name: year
           in: path
