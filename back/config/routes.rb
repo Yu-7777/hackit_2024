@@ -24,5 +24,7 @@ Rails.application.routes.draw do
     get "show" => "users#show"
   end
 
+  get "/colors" => "colors#index"
+
   resources :part_times, :shifts, :users, :gachas
 end

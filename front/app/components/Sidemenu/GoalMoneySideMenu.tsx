@@ -19,14 +19,12 @@ type Props = {
     btnRef: React.RefObject<HTMLButtonElement>;
   };
   headerName: string;
-  saveButtonName: string;
   children: React.ReactNode;
 };
 
 const GoalMoneySideMenu: React.FC<Props> = ({
   data: { isOpen, onOpen, onClose, btnRef },
   headerName,
-  saveButtonName,
   children,
 }) => {
   return (
@@ -44,10 +42,6 @@ const GoalMoneySideMenu: React.FC<Props> = ({
           </DrawerHeader>
 
           <DrawerBody>{children}</DrawerBody>
-
-          <DrawerFooter>
-            <SaveButton buttonName={saveButtonName} />
-          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
