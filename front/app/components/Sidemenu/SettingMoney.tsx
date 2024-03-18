@@ -1,7 +1,6 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import InputBox from "../inputBox";
-import Sidepeak from "../Sidepeak";
 import GoalMoneySideMenu from "./GoalMoneySideMenu";
 
 const SettingMoney = () => {
