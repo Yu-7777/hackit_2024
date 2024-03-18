@@ -91,6 +91,20 @@ const ChooseShift = (shiftData: any) => {
     onClose();
   };
 
+  const deleteSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/shifts/${shiftData.shiftData.shift.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    });
+
+    onClose();
+  }
+
   return (
     <>
       <GoalMoneySideMenu
@@ -115,6 +129,14 @@ const ChooseShift = (shiftData: any) => {
         <Text textAlign="center" fontSize="2xl" mt={6}>
           給料: {wage}円
         </Text>
+
+        <form onSubmit={deleteSubmit}>
+          <Box textAlign="center">
+            <Button mt={4} colorScheme="red" type="submit">
+              削除
+            </Button>
+          </Box>
+        </form>
       </GoalMoneySideMenu>
     </>
   );
