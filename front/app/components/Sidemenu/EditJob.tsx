@@ -1,4 +1,4 @@
-import { Button, Divider, Heading, Skeleton, useDisclosure, useToast } from "@chakra-ui/react";
+import { Box, Button, Divider, Heading, Skeleton, useDisclosure, useToast } from "@chakra-ui/react";
 import React from "react";
 import GoalMoneySideMenu from "./GoalMoneySideMenu";
 import InputBox from "../inputBox";
@@ -172,7 +172,7 @@ const EditJob = () => {
           編集するバイト先の選択
         </Heading>
         <Skeleton isLoaded={isFirstLoaded}>
-          <SelectBox round={""} title="掲示色" name="color" selectList={partTimeList} defaultSelectValue={null} value={partTime} setValue={setPartTime} />
+          <SelectBox round={""} title="バイト先" name="partTime" selectList={partTimeList} defaultSelectValue={null} value={partTime} setValue={setPartTime} />
         </Skeleton>
 
         <Divider my={4} />
@@ -186,13 +186,15 @@ const EditJob = () => {
             <InputBox round={""} inputName={"給料日(日)"} value={payDate} setValue={setPayDate} formName="payDate"></InputBox>
             <InputBox round={""} inputName={"給料（円）"} value={wage} setValue={setWage} formName="wage"></InputBox>
 
-            <Button
-              mt={4}
-              colorScheme="teal"
-              type="submit"
-            >
-              編集
-            </Button>
+            <Box textAlign="center">
+              <Button
+                mt={4}
+                colorScheme="teal"
+                type="submit"
+              >
+                編集
+              </Button>
+            </Box>
           </form>
         </Skeleton>
 
