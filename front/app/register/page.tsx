@@ -1,14 +1,18 @@
 "use client";
 
-import { Box, Heading, Stack, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, VStack, useSteps } from "@chakra-ui/react";
+import { Box, Button, Heading, Stack, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, VStack, useSteps } from "@chakra-ui/react";
 import UserInfoStep from "./steps/userInfoStep";
 import { useState } from "react";
 import GoalAnnualIncomeStep from "./steps/GoalAnnualIncomeStep";
 import CheckValueStep from "./steps/CheckValueStep";
+import { FaDoorClosed } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { BiUser } from "react-icons/bi";
 
 export default function RegisterPage() {
   const [userInfo, setUserInfo] = useState({email: "", password: "", passwordConfirmation: ""});
   const [goalAnnualIncome, setGoalAnnualIncome] = useState(100);
+  const router = useRouter();
 
   const steps = [
     {title: "ユーザ情報の登録", component: UserInfoStep({userInfo, setUserInfo})},
@@ -53,6 +57,16 @@ export default function RegisterPage() {
             </Step>
           ))}
         </Stepper>
+
+        <Box textAlign="center">
+          <Button
+            colorScheme="orange"
+            leftIcon={<BiUser/>}
+            onClick={() => router.push("/login")}
+          >
+            ログイン
+          </Button>
+        </Box>
       </Stack>
     </VStack>
   );

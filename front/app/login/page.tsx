@@ -135,6 +135,16 @@ export default function LoginPage() {
            )} 
           </Formik>
         </Box>
+
+        <Box textAlign="center">
+          <Button
+            colorScheme="orange"
+            leftIcon={<FaDoorClosed />}
+            onClick={() => router.push("/register")}
+          >
+            新規登録
+          </Button>
+        </Box>
       </Stack>
     </VStack>
   );
