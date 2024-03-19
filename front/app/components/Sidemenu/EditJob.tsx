@@ -3,10 +3,6 @@ import React from "react";
 import GoalMoneySideMenu from "./GoalMoneySideMenu";
 import InputBox from "../inputBox";
 import SelectBox from "../SelectBox";
-import ChooseColor from "./ChooseColor";
-import PayDay from "./PayDay";
-import PayValue from "./PayValue";
-import { Form, Formik } from "formik";
 
 const EditJob = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
