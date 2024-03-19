@@ -129,7 +129,7 @@ const ChooseShift = ({shiftData, setDeletedShiftId}: {shiftData: any, setDeleted
         </form>
 
         <Text textAlign="center" fontSize="2xl" mt={6}>
-          給料: {wage}円
+          給料: {Math.round(wage)}円
         </Text>
 
         <form onSubmit={deleteSubmit}>
