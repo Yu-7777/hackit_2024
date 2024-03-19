@@ -18,6 +18,9 @@ const Page = () => {
   const [email, setEmail] = useState("");
   const [goalAnnualIncome, setGoalAnnualIncome] = useState(0);
 
+  const [calendarData, setCalendarData] = React.useState<{title: string, date: string, id: string, color: string}[]>([]);
+  const [goleMoney, setGoleMoney] = React.useState<number>(0);
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<HTMLButtonElement>(null);
 
@@ -38,10 +41,30 @@ const Page = () => {
     });
   }
 
+  const fetchCalendarData = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/calendars`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("access-token")}`,
+      },
+    });
+
+    if (!response.ok) throw new Error("Network response was not ok");
+
+    const data = await response.json();
+
+    const calendarData = data.calendar.shifts;
+
+    setCalendarData(calendarData);
+    setGoleMoney(data.goalAnnualIncome * 10000);
+  };
+
   useEffect(() => {
     setIsSideMenuOpen(false);
     isUserSignIn(router, localStorage.getItem("access-token"));
     getUserInfo();
+    fetchCalendarData();
   }, [router]);
 
   const deleteUser = async () => {
@@ -84,7 +107,7 @@ const Page = () => {
   return (
     <>
       <Header isSideMenuOpen={isSideMenuOpen} toggleSideMenu={toggleSideMenu} />
-      {isSideMenuOpen && <SideMenu />}
+      {isSideMenuOpen && <SideMenu events={calendarData} goleMoney={goleMoney} />}
       <VStack h="100vh" w="100vw" justify="center">
       <Stack spacing={5} mt={10} align="center">
         <Box textAlign="center">
